@@ -31,7 +31,7 @@ export const apk = {
   url: isSafeHttpUrl(rawUrl) ? rawUrl : null,
   available: isSafeHttpUrl(rawUrl),
   /** Suggested download filename. */
-  fileName: "treepulse-latest.apk",
+  fileName: "Treepulse.apk",
   /**
    * Version string. Falls back to the version declared in the mobile app's
    * app.json / package.json, which is real repository metadata.

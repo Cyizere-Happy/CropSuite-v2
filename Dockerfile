@@ -17,11 +17,17 @@ RUN npm ci
 
 # ---- build ----------------------------------------------------------------
 FROM base AS builder
-# NEXT_PUBLIC_* values are inlined at build time, so the APK URL must be a
-# build argument. Empty is valid and yields the "Coming soon" state.
+# NEXT_PUBLIC_* values are inlined at build time, so they must be build args.
+# All are optional — empty NEXT_PUBLIC_ANDROID_APK_URL yields the "Coming soon" state.
 ARG NEXT_PUBLIC_ANDROID_APK_URL=""
+ARG NEXT_PUBLIC_APK_VERSION=""
+ARG NEXT_PUBLIC_APK_SIZE=""
+ARG NEXT_PUBLIC_APK_UPDATED=""
 ARG NEXT_PUBLIC_SITE_URL=""
 ENV NEXT_PUBLIC_ANDROID_APK_URL=${NEXT_PUBLIC_ANDROID_APK_URL}
+ENV NEXT_PUBLIC_APK_VERSION=${NEXT_PUBLIC_APK_VERSION}
+ENV NEXT_PUBLIC_APK_SIZE=${NEXT_PUBLIC_APK_SIZE}
+ENV NEXT_PUBLIC_APK_UPDATED=${NEXT_PUBLIC_APK_UPDATED}
 ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules

@@ -1,10 +1,11 @@
 import { AppScreen } from "@/components/app-screens/AppScreen";
 import { PhoneMockup } from "@/components/device/PhoneMockup";
 import { ScreenIcon } from "@/components/app-screens/parts";
-import { apkFacts } from "@/lib/apk";
+import { apk, apkFacts } from "@/lib/apk";
 import { containerClass } from "@/lib/site-config";
 import { AndroidDownloadButton } from "./AndroidDownloadButton";
 import { CountUp } from "./CountUp";
+import { QrCode } from "./QrCode";
 import { SectionCurve } from "./decor";
 
 export function Hero() {
@@ -63,17 +64,44 @@ export function Hero() {
             </a>
           </div>
 
-          <p
-            className="tp-hero-item mt-6 flex flex-wrap gap-x-2 text-xs font-semibold text-muted"
-            style={{ "--d": "720ms" } as React.CSSProperties}
-          >
-            {facts.map((f, i) => (
-              <span key={f.label} className="whitespace-nowrap">
-                {i > 0 && <span className="mr-2 text-line">·</span>}
-                {f.value}
-              </span>
-            ))}
-          </p>
+          {apk.url ? (
+            <div
+              className="tp-hero-item mt-6 flex items-center gap-4 rounded-2xl border border-line bg-surface/80 p-3 backdrop-blur"
+              style={{ "--d": "720ms" } as React.CSSProperties}
+            >
+              <QrCode
+                value={apk.url}
+                label="QR code — scan with an Android camera to download the TreePulse APK"
+                className="h-[90px] w-[90px] flex-none rounded-lg bg-white p-1.5 [&>svg]:h-full [&>svg]:w-full sm:h-[104px] sm:w-[104px]"
+              />
+              <div className="min-w-0">
+                <p className="text-sm font-extrabold text-ink">Scan to install</p>
+                <p className="mt-0.5 text-xs leading-snug text-muted">
+                  Point your Android camera at the code
+                </p>
+                <p className="mt-1.5 flex flex-wrap gap-x-1.5 text-[11px] font-semibold text-muted">
+                  {facts.map((f, i) => (
+                    <span key={f.label} className="whitespace-nowrap">
+                      {i > 0 && <span className="mr-1.5 text-line">·</span>}
+                      {f.value}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p
+              className="tp-hero-item mt-6 flex flex-wrap gap-x-2 text-xs font-semibold text-muted"
+              style={{ "--d": "720ms" } as React.CSSProperties}
+            >
+              {facts.map((f, i) => (
+                <span key={f.label} className="whitespace-nowrap">
+                  {i > 0 && <span className="mr-2 text-line">·</span>}
+                  {f.value}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
 
         <div className="tp-hero-phone relative mx-auto w-[210px] sm:w-[248px]">

@@ -65,6 +65,9 @@ jobs:
             ${{ env.IMAGE }}:latest
           build-args: |
             NEXT_PUBLIC_ANDROID_APK_URL=${{ vars.NEXT_PUBLIC_ANDROID_APK_URL }}
+            NEXT_PUBLIC_APK_VERSION=${{ vars.NEXT_PUBLIC_APK_VERSION }}
+            NEXT_PUBLIC_APK_SIZE=${{ vars.NEXT_PUBLIC_APK_SIZE }}
+            NEXT_PUBLIC_APK_UPDATED=${{ vars.NEXT_PUBLIC_APK_UPDATED }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
