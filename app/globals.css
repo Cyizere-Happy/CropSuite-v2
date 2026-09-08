@@ -316,15 +316,17 @@ body {
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
+  /* Force the final, visible state — don't rely on a near-zero animation
+     landing its fill frame before first paint. */
   .tp-hero-item,
   .tp-hero-phone,
+  .tp-nav-in,
   .tp-reveal,
-  .tp-reveal[data-stagger] > * {
+  .tp-reveal[data-stagger] > *,
+  .tp-hero-mask > span {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
-  }
-  .tp-hero-mask > span {
-    transform: none !important;
   }
 }
