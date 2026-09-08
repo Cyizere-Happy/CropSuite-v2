@@ -1,0 +1,37 @@
+# Keep the build context small and free of secrets.
+# Do NOT exclude source, public/, or config needed by `next build`.
+
+.git
+.github
+node_modules
+.next
+out
+build
+coverage
+
+*.log
+npm-debug.log*
+
+.env
+.env.*
+!.env.example
+
+# secrets / keys — must never enter an image layer
+*.pem
+*.key
+*.jks
+*.keystore
+*.p8
+*.p12
+
+# deployment + docs not needed inside the image
+README.md
+Dockerfile
+.dockerignore
+compose.production.yml
+deploy
+vercel.json
+
+.vercel
+.DS_Store
+*.tsbuildinfo

@@ -76,8 +76,7 @@ See `.env.example` for the full list.
 ## Run locally
 
 ```bash
-cd landing_page
-npm install
+npm ci
 cp .env.example .env.local   # optional; page works without it
 npm run dev                  # http://localhost:3000
 ```
@@ -85,11 +84,73 @@ npm run dev                  # http://localhost:3000
 Other scripts:
 
 ```bash
-npm run lint     # eslint (next/core-web-vitals + next/typescript)
-npx tsc --noEmit # type-check
-npm run build    # production build
-npm start        # serve the production build
+npm run lint         # eslint (next/core-web-vitals + next/typescript)
+npm run type-check   # tsc --noEmit
+npm run build        # production build (output: "standalone")
+npm start            # serve the production build
 ```
+
+## Deployment
+
+The app is containerised (`Dockerfile`, `output: "standalone"`) and deployed to a
+self-hosted server as an isolated container. It does **not** touch the existing
+admin dashboard on the same host.
+
+| | |
+| --- | --- |
+| Container name | `treepulse-landing` |
+| Host → container port | `3001` → `3000` |
+| Image | `ghcr.io/cyizere-happy/treepulse_landing_page:sha-<commit>` (+ `latest`) |
+| Server dir | `/opt/treepulse-landing` (`compose.production.yml`, `deploy.sh`) |
+| Public URL | `http://41.186.188.96:3001` |
+
+### Pipeline
+
+* **`.github/workflows/ci.yml`** — on PRs and pushes to `main`: `npm ci`, lint,
+  type-check, build. `permissions: contents: read`.
+* **`.github/workflows/deploy.yml`** — on push to `main`:
+  1. `verify` — lint / type-check / build.
+  2. `build-and-push` — build the image, push `sha-<full-commit>` **and**
+     `latest` to GHCR using the built-in `GITHUB_TOKEN`
+     (`permissions: packages: write`), with GHA layer caching. The APK URL is
+     injected from the **repository variable** `NEXT_PUBLIC_ANDROID_APK_URL`
+     (a variable, not a secret — it is intentionally in the client bundle).
+  3. `deploy` — `environment: production`, `concurrency: treepulse-production`.
+     Writes the CI deploy key to a `600` file, pins `known_hosts`
+     (`StrictHostKeyChecking=yes`), and runs `ssh devops@server "deploy sha-<sha>"`.
+     The server's authorized_keys forces `/opt/treepulse-landing/deploy.sh`,
+     which validates the `sha-<40 hex>` tag, pulls that immutable image, updates
+     only `treepulse-landing`, waits for its health check, verifies
+     `http://127.0.0.1:3001`, confirms the admin dashboard still responds, and
+     rolls back on any failure. The key file is removed with `if: always()`.
+
+### Required GitHub Actions configuration
+
+Repository → Settings → Secrets and variables → Actions:
+
+| Kind | Name | Value |
+| --- | --- | --- |
+| Secret | `DEPLOY_HOST` | server IP |
+| Secret | `DEPLOY_USER` | `devops` |
+| Secret | `DEPLOY_PORT` | `22` |
+| Secret | `DEPLOY_SSH_PRIVATE_KEY` | contents of the **CI-only** `treepulse_github_actions` key |
+| Secret | `DEPLOY_KNOWN_HOSTS` | verified `ssh-keyscan` line for the server |
+| Variable | `NEXT_PUBLIC_ANDROID_APK_URL` | stable public APK URL, or empty for the "Coming soon" state |
+
+The CI key is a **separate** deploy-only key, restricted on the server to
+`command="/opt/treepulse-landing/deploy.sh",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty`.
+The engineer's personal key stays a separate unrestricted line.
+
+### One-off server preparation
+
+```bash
+sudo mkdir -p /opt/treepulse-landing && sudo chown -R devops:devops /opt/treepulse-landing
+# copy compose.production.yml and deploy/deploy.sh into /opt/treepulse-landing/
+chmod 750 /opt/treepulse-landing/deploy.sh
+# if the GHCR package is private: docker login ghcr.io -u <user> --password-stdin  (read:packages token)
+```
+
+Then push to `main` and watch **Actions**.
 
 ## Structure
 
