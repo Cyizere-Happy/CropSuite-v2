@@ -1,0 +1,28 @@
+{
+  "name": "CropSuite — A Seed of Hope",
+  "version": "1.1",
+  "durationSeconds": 50,
+  "videoSource": "cropsuite_seed_of_hope_50s.mp4",
+  "videoSourceWeb": "cropsuite_intro_web_720p.mp4",
+  "note": "These are POETIC ON-SCREEN captions grounded in the visible action, NOT a verified transcript of the embedded audio. For true subtitles, transcribe and align the audio and use verbatim text.",
+  "placementNote": "Placements were checked against frames of the master MP4. c5 and c6 moved to upper-left: the children-at-the-table scene has a window in the upper-right corner and the market scene puts the farmer right of centre.",
+  "defaultVisibleWhenMuted": true,
+  "defaultVisibleWhenUnmuted": true,
+  "fadeInMs": 250,
+  "fadeOutMs": 230,
+  "cues": [
+    {"id":"c1","start":1.20,"end":5.55,"text":"She carries more than a hoe.","placement":"upper-right","xPercent":91,"yPercent":20,"align":"right","visual":"Walking with hoe; white space to right"},
+    {"id":"c2","start":5.85,"end":9.45,"text":"Every season begins with a question.","placement":"upper-right","xPercent":91,"yPercent":18,"align":"right","visual":"Empty field and newly appearing furrows"},
+    {"id":"c3","start":9.70,"end":12.70,"text":"What should she plant?","placement":"upper-right","xPercent":91,"yPercent":18,"align":"right","visual":"Maize and bean crop possibilities"},
+    {"id":"c4","start":12.95,"end":15.40,"text":"What if the harvest fails?","placement":"upper-right","xPercent":91,"yPercent":14,"align":"right","visual":"Imagined plants dissolving"},
+    {"id":"c5","start":15.75,"end":19.70,"text":"Will there be enough for her children?","placement":"upper-left","xPercent":9,"yPercent":16,"align":"left","visual":"Children at the table (window in the upper-right corner)"},
+    {"id":"c6","start":19.90,"end":23.75,"text":"Will her harvest support her family?","placement":"upper-left","xPercent":9,"yPercent":16,"align":"left","visual":"Market baskets and coins; farmer right of centre"},
+    {"id":"c7","start":24.00,"end":28.65,"text":"She knows the soil. But tomorrow is uncertain.","placement":"upper-right","xPercent":91,"yPercent":21,"align":"right","visual":"Farmer stops and kneels"},
+    {"id":"c8","start":29.00,"end":33.70,"text":"What if knowledge could guide her?","placement":"upper-left","xPercent":9,"yPercent":16,"align":"left","visual":"CropSuite planning panel appears"},
+    {"id":"c9","start":33.95,"end":38.65,"text":"Compare crops. Consider climate. Plan what comes next.","placement":"upper-left","xPercent":9,"yPercent":16,"align":"left","visual":"Field and crop comparison model"},
+    {"id":"c10","start":38.90,"end":44.45,"text":"A clearer choice can begin a new season.","placement":"upper-right","xPercent":91,"yPercent":16,"align":"right","visual":"Farmer prepares planting rows"},
+    {"id":"c11","start":44.70,"end":48.35,"text":"And from one small seed... hope begins again.","placement":"upper-right","xPercent":91,"yPercent":16,"align":"right","visual":"Family reunion"}
+  ],
+  "hideCaptionsAfter":48.35,
+  "reasonForEndSilence":"The CropSuite brand and A Seed of Hope title are already baked into the film at the ending. Do not overlay duplicate title text."
+}

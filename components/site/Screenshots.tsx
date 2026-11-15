@@ -4,9 +4,9 @@ import { containerClass } from "@/lib/site-config";
 import { SectionReveal } from "./SectionReveal";
 
 const shots: { screen: ScreenName; label: string; caption: string }[] = [
-  { screen: "dashboard", label: "Home", caption: "Pick your next action" },
-  { screen: "earnings", label: "Earnings", caption: "The Global Secure Wallet" },
-  { screen: "notifications", label: "Alerts", caption: "Approvals & inspections" },
+  { screen: "farms", label: "My Farm", caption: "Screen in design" },
+  { screen: "earnings", label: "Crop Comparison", caption: "Screen in design" },
+  { screen: "notifications", label: "Next Crop", caption: "Screen in design" },
 ];
 
 /**
@@ -26,15 +26,15 @@ export function Screenshots() {
             A look inside the app
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Rebuilt from the live TreePulse interface, with demo records in place
-            of real data.
+            The CropSuite screens are being designed for the Kayonza pilot.
+            Real screenshots will replace these blank displays.
           </p>
         </SectionReveal>
 
         <div className="relative mt-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[72%] w-[min(620px,94%)] -translate-x-1/2 -translate-y-1/2 rounded-[26%] bg-gradient-to-br from-sage to-[#d5e9d2]"
+            className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[72%] w-[min(620px,94%)] -translate-x-1/2 -translate-y-1/2 rounded-[26%] bg-gradient-to-br from-sage to-[#c6dec3]"
           />
           <SectionReveal
             as="ul"
@@ -49,7 +49,7 @@ export function Screenshots() {
                 }`}
               >
                 <PhoneMockup
-                  label={`TreePulse ${shot.label} screen — ${shot.caption}`}
+                  label={`CropSuite phone placeholder — ${shot.label} screen is in design`}
                   className="w-full"
                   floaty={i === 1}
                 >

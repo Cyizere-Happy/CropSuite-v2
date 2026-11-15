@@ -1,4 +1,4 @@
-import { containerClass, overviewCards, siteConfig } from "@/lib/site-config";
+import { containerClass, overviewCards, pilotTags } from "@/lib/site-config";
 import { FeatureIcon } from "./icons";
 import { OverviewShape, SectionCurve } from "./decor";
 import { SectionReveal } from "./SectionReveal";
@@ -45,20 +45,21 @@ export function Overview() {
             Overview
           </p>
           <h2 className="mt-3 text-[1.7rem] font-black leading-tight text-ink sm:text-[2.15rem]">
-            One field app, the whole planting cycle
+            From your soil to your next season
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Register a plot, capture every tree, return for the 3-month
-            inspection, and follow each record through to payout. Data syncs to
-            the backend; recent screens stay readable offline.
+            Tell CropSuite where you farm, which crops you are considering, when
+            you want to plant and what grew there before. It compares your
+            options against available environmental evidence and shows the
+            reasoning behind every suggestion.
           </p>
           <ul className="mt-5 flex flex-wrap gap-2">
-            {siteConfig.languages.map((lang) => (
+            {pilotTags.map((tag) => (
               <li
-                key={lang}
+                key={tag}
                 className="rounded-full border border-line bg-surface px-3 py-1 text-xs font-semibold text-muted"
               >
-                {lang}
+                {tag}
               </li>
             ))}
           </ul>

@@ -1,40 +1,80 @@
-# TreePulse landing page
+# CropSuite landing page
 
-A production landing page that advertises the **TreePulse** mobile app
-(`../TreePulse-App`). Built with **Next.js 16 (App Router)**, **TypeScript**,
+The public landing page for **CropSuite** (originally developed as
+**FieldShift**) — a Rwanda-first crop-planning and rotation decision-support
+platform. Built with **Next.js 16 (App Router)**, **TypeScript**,
 **Tailwind CSS v4** and reusable React components.
 
-The visual composition — in-hero navigation, layered organic background shapes,
-phone placements, curved section transitions, the four-card overview block and
-the alternating feature rows — follows the supplied reference (`../Landing_Page.jpg`).
-Branding, colours, copy, screens and calls to action are all TreePulse's.
+The page keeps the complete visual system of the earlier TreePulse build of
+this site — the same colour tokens, Jost typography, layout and section order,
+phone mockups and their placement, backgrounds, curves and motion — and
+replaces only the public branding and wording. A cinematic introduction video
+now plays once per browser session before the landing page.
 
-## What it says about TreePulse (all derived from the app source)
+## What it says about CropSuite
 
-| Landing-page claim | Source in `../TreePulse-App` |
+Everything on the page is limited to what the platform is designed to do:
+
+| Landing-page claim | Basis |
 | --- | --- |
-| Brand colours (`#6EBA6D` primary, `#4E8A4C` deep, sage/mint, ink/muted) | `src/theme/colors.ts` |
-| Jost typography | `@expo-google-fonts/jost` in `package.json`, used across every screen |
-| Logo mark (line-art tree + ECG pulse) | vector recreation of `assets/icon.png` / `assets/adaptive-icon.png` |
-| "Walk your plot… get your area in hectares" | `src/screens/FarmRegistrationScreen.tsx`, `farm_registration` in `src/locales/translations/en.json` |
-| "Register trees in batches with a photo and species" | `src/screens/TreeRegistrationScreen.tsx`, `tree_registration` i18n |
-| "3-month inspection… within 15 m of the tree" | `src/screens/TreeMonitoringScreen.tsx`, `tree_monitoring.partial_msg` i18n |
-| "Global Secure Wallet", approved / rejected / pending, RWF payouts | `src/screens/TreeStatusScreen.tsx`, `tree_status` i18n |
-| Registered farms with UPI, district, approval status | `src/screens/MyFarmsScreen.tsx`, `src/screens/FarmDetailsScreen.tsx` |
-| Approval + inspection notifications | `src/screens/NotificationsScreen.tsx` |
-| Backend sync / offline cached screens | `src/services/api.ts`, "Offline – showing cached data" banners |
-| English, Kinyarwanda, Kiswahili, French | `src/locales/translations/*.json` |
-| App version `1.0.0`, package `com.treepulse` | `app.json` |
+| Identify your farm location; explore agricultural and climate evidence | Core farmer flow (Know Your Land) |
+| Compare the crops you are considering and the factors behind the choice | Choose Your Crops |
+| Explore planting windows and the conditions that matter before you sow | Plan Your Season |
+| Consider what to plant next with crop-rotation guidance | Think Beyond One Harvest |
+| See the reasons, assumptions and limitations behind a plan | Decisions You Understand |
+| Initial pilot: Kayonza, Rwanda · initial crops: maize and common beans | Pilot scope |
+| Informed by NASA POWER and FAO GAEZ, where verified and integrated | Data sources |
+
+The page makes **no** claims about yields, prices, weather outcomes or
+harvests, and shows no adoption or performance statistics. The numbers inside
+the phone mockups (plot sizes, a rainfall figure, a planting window) are
+labelled demo records.
+
+## Cinematic introduction
+
+`components/intro/IntroGate.tsx` is a full-screen layer rendered **before** the
+landing page (`app/page.tsx`); the landing page itself is untouched underneath.
+
+* Assets in `public/`: `cropsuite_seed_of_hope_50s.mp4` (1920×1080, 50 s,
+  stereo narration), `cropsuite_intro_poster.jpg`, `intro-captions.json`.
+  Drop in `cropsuite_intro_web_720p.mp4` and `lib/intro.ts` prefers it
+  automatically.
+* Fills landscape screens edge to edge (`object-fit: cover`); on portrait
+  phones it is letterboxed in the same white. The film's light-grey stage is
+  lifted to page white (`filter: brightness`) and its edges are feathered, so
+  the silhouettes sit directly on the page like a 3D model.
+* Starts **with the narration** whenever the browser allows it. If sound
+  autoplay is blocked the film still starts muted and a **Tap for sound**
+  button brings the narration in; if all autoplay is blocked a **Play
+  introduction** button appears.
+* Timed poetic lines from `intro-captions.json` fade in over the white
+  negative space with or without sound (upper-right early, upper-left once the
+  CropSuite panel appears; two cues moved to the left after checking the
+  frames). Cue sync uses `video.currentTime` on `timeupdate`, `seeked` and a
+  rAF loop, so it survives buffering and seeking.
+* Independent **Captions** toggle (bottom bar), **Skip introduction** at any
+  time (also `Esc`) and a **Continue to CropSuite** fallback if the file fails.
+* Completion is remembered in `sessionStorage` (`cropsuite_intro_seen`); a
+  pre-paint script in `app/layout.tsx` flags `<html data-intro>` on the home
+  page so returning visitors never see a flash and the hero's on-load
+  animations wait until the layer leaves. **Replay our story** in the footer
+  re-opens it.
+* The captions JSON is editorial on-screen text, **not** a verified transcript
+  of the narration.
+
+## Get Started → sign-in
+
+**Get Started** (nav + hero) opens `/login` (`app/login/page.tsx`): the same
+tokens, type and background shapes, with a **Continue with Google** button.
+No identity provider is connected yet — the button explains that instead of
+pretending to sign anyone in (`components/auth/GoogleSignInButton.tsx`).
 
 ## Screenshots
 
-The Expo app targets native modules (camera, GPS, maps) and could not be
-launched to capture real device screenshots in this environment. Per the brief,
-the five screens shown (`components/app-screens/`) are **faithful HTML/CSS
-reconstructions** of the real screens — same layout, same colour tokens, same
-Jost type, same in-app wording — with **safe demo records** (generic Rwandan
-place names, a plausible UPI format, round counts) instead of any real farmer,
-account, coordinate or payout data.
+The CropSuite screens are still in design, so every phone mockup shows a
+clean, blank display (`components/app-screens/AppScreen.tsx`: status bar +
+home indicator only). The frames, sizes, tilt, shadows and placement are the
+original ones; real screenshots can be dropped into the same slots later.
 
 ## Phone mockups
 
@@ -53,23 +93,12 @@ device with `perspective()`; the tilt flattens under 768 px.
 ## APK download
 
 The **Download for Android** buttons link to `NEXT_PUBLIC_ANDROID_APK_URL`. When
-that variable is missing the buttons render a disabled **"Android app — coming
-soon"** state (never a `#` link).
+that variable is missing the buttons render a disabled **"Android — coming
+soon"** state (never a `#` link). Leave it empty until a CropSuite build exists;
+the previous TreePulse APK must not be configured for this site.
 
-`../TreePulse-App/.github/workflows/deploy.yml` builds a release APK when mobile
-source or build config changes on `main`, uploads it as the
-`treepulse-release-apk` workflow artifact, and republishes it to the `latest`
-GitHub Release as **`treepulse-latest.apk`**. Point the env var at the stable
-asset URL:
-
-```
-NEXT_PUBLIC_ANDROID_APK_URL=https://github.com/Cyizere-Happy/TreePulse-App/releases/latest/download/treepulse-latest.apk
-```
-
-Optional metadata shown beside the button — `NEXT_PUBLIC_APK_VERSION`
-(defaults to `1.0.0` from `app.json`), `NEXT_PUBLIC_APK_SIZE`,
-`NEXT_PUBLIC_APK_UPDATED` — the CI run writes these into `release-metadata.json`
-attached to the release.
+Optional metadata shown beside the button: `NEXT_PUBLIC_APK_VERSION`,
+`NEXT_PUBLIC_APK_SIZE`, `NEXT_PUBLIC_APK_UPDATED` (all hidden when empty).
 
 See `.env.example` for the full list.
 
@@ -156,18 +185,24 @@ Then push to `main` and watch **Actions**.
 
 ```
 app/
-  layout.tsx            Jost font, metadata, viewport
-  page.tsx              section assembly + skip link
+  layout.tsx            Jost font, metadata, viewport, intro boot script
+  page.tsx              intro layer + section assembly + skip link
+  login/page.tsx        sign-in screen (Get Started)
   globals.css           Tailwind v4 @theme tokens (mapped 1:1 to the app palette)
   icon.svg / apple-icon.png / opengraph-image.png / twitter-image.png
 components/
-  brand/                TreePulseMark (SVG), TreePulseLogo
+  brand/                CropSuiteMark (SVG), CropSuiteLogo
+  intro/                IntroGate (cinematic introduction), ReplayIntroButton
   device/PhoneMockup    reusable CSS phone case
-  app-screens/          login · dashboard · farms · earnings · notifications
+  app-screens/          blank phone display (status bar + home indicator) until real screens exist
+  auth/                 GoogleSignInButton (placeholder until OAuth is connected)
   site/                 Nav · Hero · Overview · Features · Screenshots · DownloadCta · SiteFooter
                         + decor (organic shapes / curves), icons, AndroidDownloadButton, SectionReveal
 lib/
-  site-config.ts        all page content, cross-referenced to the app source
+  site-config.ts        all page content
   apk.ts                APK URL + metadata resolution
-public/treepulse-app-icon.png   real app icon (downscaled to 512px)
+  intro.ts              picks the intro video file (720p web version if present)
+  intro-events.ts       session key + replay/done events shared with the page
+public/cropsuite-app-icon.png   app icon (512px), generated from the SVG mark
+public/cropsuite_seed_of_hope_50s.mp4 · cropsuite_intro_poster.jpg · intro-captions.json
 ```

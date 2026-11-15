@@ -51,7 +51,7 @@ export function AndroidDownloadButton({
   const skin =
     variant === "onDark"
       ? "bg-white text-primary-deep hover:bg-sage"
-      : "bg-primary-deep text-white shadow-[0_16px_30px_-12px_rgba(78,138,76,0.6)] hover:bg-[#437a41]";
+      : "bg-primary-deep text-white shadow-[0_16px_30px_-12px_rgba(46,107,50,0.6)] hover:bg-[#244f27]";
 
   return (
     <a

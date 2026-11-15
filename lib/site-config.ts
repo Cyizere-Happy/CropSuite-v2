@@ -1,37 +1,51 @@
 /**
- * Central content + configuration for the TreePulse landing page.
+ * Central content + configuration for the CropSuite landing page.
  *
- * Every product claim, feature description and screen label below is derived
- * from the TreePulse mobile app source (TreePulse-App/). Nothing here is
- * invented marketing copy or an unverified statistic.
+ * CropSuite (originally developed as FieldShift) is a Rwanda-first crop-planning
+ * and rotation decision-support platform. Everything below describes only what
+ * the platform is designed to do — identify a farm location, compare candidate
+ * crops, explore planting windows, consider the next crop in a rotation and
+ * explain the reasoning and limits behind a plan. No yields, profits, weather
+ * outcomes or adoption figures are claimed anywhere on the page.
  *
- * Key sources:
- *  - src/theme/colors.ts .................. brand colours
- *  - src/locales/translations/en.json .... in-app wording
- *  - src/screens/SelectionScreen.tsx ..... "What would you like to do today?"
- *  - src/screens/FarmRegistrationScreen.tsx / farm_registration i18n .. GPS boundary mapping
- *  - src/screens/TreeRegistrationScreen.tsx / tree_registration i18n .. batch tree capture
- *  - src/screens/TreeMonitoringScreen.tsx / tree_monitoring i18n ...... 3-month inspections, <15m rule
- *  - src/screens/TreeStatusScreen.tsx / tree_status i18n ............. Global Secure Wallet, RWF payouts
- *  - src/screens/MyFarmsScreen.tsx / my_farms i18n .................. registered plots
- *  - src/screens/NotificationsScreen.tsx .......................... approval + inspection alerts
- *  - src/services/api.ts ......................................... NestJS backend integration
- *  - app.json ................................................... version, package name, permissions
+ *  - Initial pilot ............ Kayonza, Rwanda
+ *  - Initial crop scope ....... maize and common beans
+ *  - Environmental evidence ... NASA POWER and FAO GAEZ, where verified and integrated
  */
 
 export const siteConfig = {
-  name: "TreePulse",
-  /** From app.json -> expo.version and package.json */
-  appVersion: "1.0.0",
-  /** From app.json -> expo.android.package */
-  androidPackage: "com.treepulse",
-  /** Real public repository for the mobile app */
-  repoUrl: "https://github.com/Cyizere-Happy/TreePulse-App",
-  /** Languages actually bundled in src/locales/translations */
-  languages: ["English", "Kinyarwanda", "Kiswahili", "French"],
+  name: "CropSuite",
+  /** The working name the platform was first developed under. */
+  formerName: "FieldShift",
+  /** Where the first pilot runs. */
+  pilot: { district: "Kayonza", country: "Rwanda" },
+  /** Initial crop scope. */
+  crops: ["Maize", "Common beans"],
+  /** Environmental datasets the platform is informed by, where integrated. */
+  datasets: ["NASA POWER", "FAO GAEZ"],
   description:
-    "TreePulse is the field companion for tree-planting farmers in Rwanda: map a farm by walking its boundary, geo-tag and photograph every tree, complete 3-month health inspections, and track which trees are verified and what they earn.",
+    "CropSuite is a Rwanda-first crop-planning and rotation decision-support platform. Farmers identify their farm location, compare the crops they are considering, explore planting windows and what could come next in a rotation, and see the reasons and limitations behind each plan. Initial pilot: Kayonza, Rwanda, focused on maize and common beans.",
 } as const;
+
+/** Short facts shown in the hero and the download strip (no invented numbers). */
+export const pilotFacts = [
+  "Kayonza, Rwanda",
+  "Maize & common beans",
+  "Rotation guidance",
+] as const;
+
+/** Pills shown in the Overview section. */
+export const pilotTags = [
+  "Kayonza pilot",
+  "Maize",
+  "Common beans",
+  "NASA POWER",
+  "FAO GAEZ",
+] as const;
+
+/** Closing message used on the dark strip above the footer. */
+export const closingMessage =
+  "Every great harvest begins with a better-informed decision.";
 
 /**
  * Single source of truth for the page's horizontal rhythm. Every section — nav,
@@ -50,37 +64,46 @@ export const navLinks: NavLink[] = [
   { label: "Screenshots", href: "#screenshots" },
 ];
 
+export type FeatureIconName =
+  | "map"
+  | "tree"
+  | "clipboard"
+  | "wallet"
+  | "calendar"
+  | "rotate"
+  | "info";
+
 /** Four capability cards for the Overview section (no invented metrics). */
 export const overviewCards: {
-  icon: "map" | "tree" | "clipboard" | "wallet";
+  icon: FeatureIconName;
   title: string;
   body: string;
 }[] = [
   {
     icon: "map",
-    title: "Boundary mapping",
-    body: "Walk the perimeter; get the plot area in hectares.",
+    title: "Know your land",
+    body: "Agricultural and climate evidence for your farm location.",
   },
   {
     icon: "tree",
-    title: "Geo-tagged trees",
-    body: "Each tree saved with a photo, species and location.",
+    title: "Choose your crops",
+    body: "Compare the crops you want to grow and what shapes the choice.",
   },
   {
-    icon: "clipboard",
-    title: "3-month checks",
-    body: "Guided inspections, verified within 15 m of the tree.",
+    icon: "calendar",
+    title: "Plan your season",
+    body: "Planting windows and the conditions that matter before you sow.",
   },
   {
-    icon: "wallet",
-    title: "RWF payouts",
-    body: "Approved, rejected and pending trees, totalled per plot.",
+    icon: "rotate",
+    title: "Think beyond one harvest",
+    body: "What to plant next, with crop-rotation guidance.",
   },
 ];
 
 export type FeatureContent = {
   id: string;
-  icon: "map" | "tree" | "wallet";
+  icon: FeatureIconName;
   eyebrow: string;
   title: string;
   body: string;
@@ -96,32 +119,32 @@ export type FeatureContent = {
 
 export const features: FeatureContent[] = [
   {
-    id: "mapping",
+    id: "land",
     icon: "map",
-    eyebrow: "Farm registration",
-    title: "Walk the boundary, get your area",
-    body: "TreePulse records a corner each time you tap as you walk the plot edge, then returns the size in hectares when you close the loop. Every farm keeps its UPI number, district and approval status.",
+    eyebrow: "Know your land",
+    title: "Start from your farm location",
+    body: "Explore agricultural and climate evidence relevant to your farm location. CropSuite is informed by datasets such as NASA POWER and FAO GAEZ where they are verified and integrated.",
     screen: "farms",
     media: "right",
     tilt: true,
     download: true,
   },
   {
-    id: "monitoring",
+    id: "crops",
     icon: "tree",
-    eyebrow: "Tree monitoring",
-    title: "Register trees, then inspect on schedule",
-    body: "Capture trees in a batch with a photo and species for each. Three months on, TreePulse lists the trees that are due and checks you are within 15 m before it accepts the update.",
-    screen: "notifications",
+    eyebrow: "Choose your crops · Plan your season",
+    title: "Compare crops, then pick your planting window",
+    body: "Compare the crops you want to grow and understand the factors that may influence your planting decision. Then explore planting windows and the conditions that matter before you sow.",
+    screen: "earnings",
     media: "left",
   },
   {
-    id: "earnings",
-    icon: "wallet",
-    eyebrow: "Earnings & verification",
-    title: "Every verified tree is a payout",
-    body: "The Global Secure Wallet totals approved trees across all of your plots and shows what is still pending. Open one plot for its UPI number, verification rate and payout.",
-    screen: "earnings",
+    id: "rotation",
+    icon: "rotate",
+    eyebrow: "Think beyond one harvest",
+    title: "Decisions you understand",
+    body: "Consider what to plant next with crop-rotation guidance, and see the reasons, assumptions and limitations behind your planting plan. CropSuite does not guarantee yields, prices or weather.",
+    screen: "notifications",
     media: "right",
     download: true,
   },

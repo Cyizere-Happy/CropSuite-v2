@@ -18,12 +18,12 @@ export function HeroBackdrop() {
       >
         <defs>
           <linearGradient id="tp-hero-a" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#93d090" />
-            <stop offset="1" stopColor="#4e8a4c" />
+            <stop offset="0" stopColor="#6aa96a" />
+            <stop offset="1" stopColor="#2e6b32" />
           </linearGradient>
           <linearGradient id="tp-hero-b" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#cfe9cc" />
-            <stop offset="1" stopColor="#7cc179" />
+            <stop offset="0" stopColor="#bcd9b8" />
+            <stop offset="1" stopColor="#559a55" />
           </linearGradient>
         </defs>
         <path
@@ -43,7 +43,7 @@ export function HeroBackdrop() {
         fill="none"
       >
         <path
-          fill="#ecf5eb"
+          fill="#e4efe2"
           d="M210 24c66 8 128 55 149 118 21 63 1 141-46 186-47 45-121 57-183 33S28 258 24 193C20 129 55 60 118 33c40-17 26-17 92-9Z"
         />
       </svg>
@@ -85,9 +85,9 @@ export function DeviceShape({
   className?: string;
 }) {
   const g = {
-    a: ["#9dd39a", "#57a055"],
-    b: ["#cfe9cc", "#7cc179"],
-    c: ["#b6dfb3", "#63ac60"],
+    a: ["#7fb97c", "#3f8b43"],
+    b: ["#bcd9b8", "#559a55"],
+    c: ["#9fc99b", "#4a9149"],
   } as const;
   const [from, to] = g[variant];
   return (
@@ -114,8 +114,8 @@ export function OverviewShape({ className = "" }: { className?: string }) {
     <svg aria-hidden="true" viewBox="0 0 420 420" className={className} fill="none">
       <defs>
         <linearGradient id="tp-ov" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#a6d8a3" />
-          <stop offset="1" stopColor="#57a055" />
+          <stop offset="0" stopColor="#8dc38a" />
+          <stop offset="1" stopColor="#3f8b43" />
         </linearGradient>
       </defs>
       <path
@@ -125,7 +125,7 @@ export function OverviewShape({ className = "" }: { className?: string }) {
         opacity="0.9"
       />
       <path
-        fill="#ecf5eb"
+        fill="#e4efe2"
         d="M150 60h140c50 0 90 40 90 90v140c0 50-40 90-90 90H150c-50 0-90-40-90-90V150c0-50 40-90 90-90Z"
         transform="rotate(7 210 210)"
         opacity="0.45"

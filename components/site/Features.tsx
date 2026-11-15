@@ -11,11 +11,9 @@ import { FeatureIcon } from "./icons";
 import { SectionReveal } from "./SectionReveal";
 
 const screenLabels: Record<string, string> = {
-  farms: "TreePulse My Farms screen — registered plots with area, tree count and approval status",
-  notifications:
-    "TreePulse Notifications screen — a farm approval, a 3-month inspection reminder and a pending review",
-  earnings:
-    "TreePulse My Trees & Earnings screen — the Global Secure Wallet total with approved, rejected and pending counts",
+  farms: "CropSuite phone placeholder — the My Farm screen is in design",
+  notifications: "CropSuite phone placeholder — the Next Crop screen is in design",
+  earnings: "CropSuite phone placeholder — the Crop Comparison screen is in design",
 };
 
 const shapeVariants = ["a", "b", "c"] as const;
@@ -92,7 +90,7 @@ export function Features() {
             Features
           </p>
           <h2 className="mt-3 text-[1.7rem] font-black leading-tight text-ink sm:text-[2.15rem]">
-            Built around the work farmers already do
+            Built around the decisions farmers already make
           </h2>
         </SectionReveal>
 

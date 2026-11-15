@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { TreePulseLogo } from "@/components/brand/TreePulseLogo";
+import { CropSuiteLogo } from "@/components/brand/CropSuiteLogo";
 import { containerClass, navLinks } from "@/lib/site-config";
 
 export function Nav() {
@@ -33,8 +33,8 @@ export function Nav() {
         aria-label="Primary"
         className={`${containerClass} flex items-center justify-between py-4`}
       >
-        <a href="#home" onClick={() => setOpen(false)} aria-label="TreePulse — top">
-          <TreePulseLogo markClassName="h-7 w-7" wordClassName="text-base" />
+        <a href="#home" onClick={() => setOpen(false)} aria-label="CropSuite — top">
+          <CropSuiteLogo markClassName="h-7 w-7" wordClassName="text-base" />
         </a>
 
         <ul className="hidden items-center gap-9 md:flex">
@@ -51,10 +51,10 @@ export function Nav() {
         </ul>
 
         <a
-          href="#download"
-          className="hidden rounded-full bg-primary-deep px-5 py-2.5 text-[13px] font-bold text-white transition-colors hover:bg-[#437a41] md:inline-block"
+          href="/login"
+          className="hidden rounded-full bg-primary-deep px-5 py-2.5 text-[13px] font-bold text-white transition-colors hover:bg-[#244f27] md:inline-block"
         >
-          Download
+          Start Planning
         </a>
 
         <button
@@ -90,11 +90,11 @@ export function Nav() {
           ))}
         </ul>
         <a
-          href="#download"
+          href="/login"
           onClick={() => setOpen(false)}
           className="mt-2 block rounded-full bg-primary-deep px-5 py-3 text-center text-sm font-bold text-white"
         >
-          Download
+          Start Planning
         </a>
       </div>
     </header>

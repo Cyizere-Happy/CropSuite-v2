@@ -1,11 +1,10 @@
+import type { FeatureIconName } from "@/lib/site-config";
+
 /**
  * Small line icons used above feature headings and in the Overview cards.
- * Drawn in the same stroke style as lucide-react-native, which the mobile
- * app uses for its iconography.
+ * Drawn in the same lucide-style stroke as the rest of the page.
  */
-type IconName = "map" | "tree" | "clipboard" | "wallet";
-
-const paths: Record<IconName, React.ReactNode> = {
+const paths: Record<FeatureIconName, React.ReactNode> = {
   map: (
     <>
       <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" />
@@ -32,13 +31,34 @@ const paths: Record<IconName, React.ReactNode> = {
       <circle cx="16" cy="13" r="1.4" />
     </>
   ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M8 3v4M16 3v4M3 10h18" />
+      <path d="M8 15h3" />
+    </>
+  ),
+  rotate: (
+    <>
+      <path d="M20 11a8 8 0 0 0-14.5-4.5L3 9" />
+      <path d="M3 4v5h5" />
+      <path d="M4 13a8 8 0 0 0 14.5 4.5L21 15" />
+      <path d="M21 20v-5h-5" />
+    </>
+  ),
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5M12 8h.01" />
+    </>
+  ),
 };
 
 export function FeatureIcon({
   name,
   className = "h-5 w-5",
 }: {
-  name: IconName;
+  name: FeatureIconName;
   className?: string;
 }) {
   return (

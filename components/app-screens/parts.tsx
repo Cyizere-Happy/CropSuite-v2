@@ -1,5 +1,5 @@
 /**
- * Shared chrome for the reconstructed TreePulse screens.
+ * Shared chrome for the reconstructed CropSuite screens.
  *
  * Every screen sets a root font-size in `cqi` (a share of the phone display
  * width) and expresses all type, spacing and icon sizes in `em`, so the whole
@@ -41,7 +41,7 @@ export function HomeIndicator() {
   );
 }
 
-type IconName =
+export type IconName =
   | "bell"
   | "settings"
   | "chevron-left"
@@ -57,7 +57,10 @@ type IconName =
   | "refresh"
   | "clock"
   | "leaf"
-  | "map-pin";
+  | "map-pin"
+  | "calendar"
+  | "rotate"
+  | "info";
 
 const iconPaths: Record<IconName, React.ReactNode> = {
   bell: <path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M9 20a3 3 0 0 0 6 0" />,
@@ -120,6 +123,24 @@ const iconPaths: Record<IconName, React.ReactNode> = {
     </>
   ),
   refresh: <path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5" />,
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M8 3v4M16 3v4M3 10h18M8 15h3" />
+    </>
+  ),
+  rotate: (
+    <>
+      <path d="M20 11a8 8 0 0 0-14.5-4.5L3 9M3 4v5h5" />
+      <path d="M4 13a8 8 0 0 0 14.5 4.5L21 15M21 20v-5h-5" />
+    </>
+  ),
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5M12 8h.01" />
+    </>
+  ),
   clock: (
     <>
       <circle cx="12" cy="12" r="9" />

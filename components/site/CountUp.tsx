@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { INTRO_DONE_EVENT, introIsActive } from "@/lib/intro-events";
 
 /**
  * Counts up to `value` once, the first time it scrolls into view.
  * Renders the final value on the server and for prefers-reduced-motion /
- * no IntersectionObserver, so it is never blank.
+ * no IntersectionObserver, so it is never blank. While the CropSuite
+ * introduction covers the page the count waits, so it still plays when the
+ * hero is actually revealed.
  */
 export function CountUp({
   value,
@@ -30,8 +33,9 @@ export function CountUp({
     ).matches;
     if (reduce || typeof IntersectionObserver === "undefined") return;
 
-    let raf = requestAnimationFrame(() => setDisplay(0));
+    let raf = 0;
     let started = false;
+    let observer: IntersectionObserver | null = null;
 
     const run = () => {
       if (started) return;
@@ -46,22 +50,33 @@ export function CountUp({
       raf = requestAnimationFrame(tick);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            run();
-            observer.disconnect();
+    const begin = () => {
+      raf = requestAnimationFrame(() => setDisplay(0));
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              run();
+              observer?.disconnect();
+            }
           }
-        }
-      },
-      { threshold: 0.4 },
-    );
-    observer.observe(node);
+        },
+        { threshold: 0.4 },
+      );
+      observer.observe(node);
+    };
+
+    const onIntroDone = () => begin();
+    if (introIsActive()) {
+      window.addEventListener(INTRO_DONE_EVENT, onIntroDone, { once: true });
+    } else {
+      begin();
+    }
 
     return () => {
+      window.removeEventListener(INTRO_DONE_EVENT, onIntroDone);
       cancelAnimationFrame(raf);
-      observer.disconnect();
+      observer?.disconnect();
     };
   }, [value, duration]);
 

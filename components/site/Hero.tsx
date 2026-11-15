@@ -2,9 +2,7 @@ import { AppScreen } from "@/components/app-screens/AppScreen";
 import { PhoneMockup } from "@/components/device/PhoneMockup";
 import { ScreenIcon } from "@/components/app-screens/parts";
 import { apk, apkFacts } from "@/lib/apk";
-import { containerClass } from "@/lib/site-config";
-import { AndroidDownloadButton } from "./AndroidDownloadButton";
-import { CountUp } from "./CountUp";
+import { containerClass, pilotFacts } from "@/lib/site-config";
 import { QrCode } from "./QrCode";
 import { SectionCurve } from "./decor";
 
@@ -25,7 +23,7 @@ export function Hero() {
             style={{ "--d": "60ms" } as React.CSSProperties}
           >
             <ScreenIcon name="leaf" className="h-3.5 w-3.5" />
-            Android field app
+            Kayonza pilot · Rwanda
           </span>
 
           <h1 className="mt-5 text-[2.15rem] font-black leading-[1.08] tracking-tight text-ink sm:text-[2.9rem]">
@@ -33,13 +31,13 @@ export function Hero() {
               className="tp-hero-mask"
               style={{ "--d": "180ms" } as React.CSSProperties}
             >
-              <span>Map your farm.</span>
+              <span>Know your crop.</span>
             </span>
             <span
               className="tp-hero-mask"
               style={{ "--d": "300ms" } as React.CSSProperties}
             >
-              <span>Track every tree.</span>
+              <span>Plan what’s next.</span>
             </span>
           </h1>
 
@@ -47,20 +45,26 @@ export function Hero() {
             className="tp-hero-item mt-4 text-[15px] leading-relaxed text-muted sm:text-base"
             style={{ "--d": "480ms" } as React.CSSProperties}
           >
-            The Android app that helps tree-planting farmers in Rwanda map plots,
-            monitor trees, and track what each verified tree earns.
+            CropSuite helps farmers understand their land, compare crop options,
+            and plan their next growing season with confidence informed by data.
           </p>
 
           <div
             className="tp-hero-item mt-7 flex flex-wrap items-center gap-3"
             style={{ "--d": "600ms" } as React.CSSProperties}
           >
-            <AndroidDownloadButton size="md" />
             <a
-              href="#features"
+              href="/login"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary-deep px-5 py-3 text-sm font-bold text-white shadow-[0_16px_30px_-12px_rgba(46,107,50,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#244f27]"
+            >
+              <ScreenIcon name="leaf" className="h-5 w-5" />
+              Start Planning
+            </a>
+            <a
+              href="#overview"
               className="inline-flex items-center rounded-full border border-line bg-surface/80 px-5 py-3 text-sm font-bold text-ink backdrop-blur transition-colors hover:border-primary-deep hover:text-primary-deep"
             >
-              See features
+              Explore CropSuite
             </a>
           </div>
 
@@ -71,7 +75,7 @@ export function Hero() {
             >
               <QrCode
                 value={apk.url}
-                label="QR code — scan with an Android camera to download the TreePulse APK"
+                label="QR code — scan with an Android camera to download the CropSuite APK"
                 className="h-[90px] w-[90px] flex-none rounded-lg bg-white p-1.5 [&>svg]:h-full [&>svg]:w-full sm:h-[104px] sm:w-[104px]"
               />
               <div className="min-w-0">
@@ -94,10 +98,10 @@ export function Hero() {
               className="tp-hero-item mt-6 flex flex-wrap gap-x-2 text-xs font-semibold text-muted"
               style={{ "--d": "720ms" } as React.CSSProperties}
             >
-              {facts.map((f, i) => (
-                <span key={f.label} className="whitespace-nowrap">
+              {pilotFacts.map((fact, i) => (
+                <span key={fact} className="whitespace-nowrap">
                   {i > 0 && <span className="mr-2 text-line">·</span>}
-                  {f.value}
+                  {fact}
                 </span>
               ))}
             </p>
@@ -106,7 +110,7 @@ export function Hero() {
 
         <div className="tp-hero-phone relative mx-auto w-[210px] sm:w-[248px]">
           <PhoneMockup
-            label="TreePulse home screen — 'What would you like to do today?' with farm registration, tree registration, and earnings"
+            label="CropSuite phone — the app screens are in design; this display is intentionally blank"
             className="w-full"
             floaty
           >
@@ -115,15 +119,15 @@ export function Hero() {
 
           <div className="tp-float-soft absolute -left-6 bottom-8 w-[148px] rounded-2xl border border-line bg-surface p-3.5 shadow-soft sm:-left-16 sm:bottom-10 sm:w-[168px]">
             <p className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wide text-muted">
-              <ScreenIcon name="wallet" className="h-3 w-3 text-primary-deep" />
-              Secure Wallet
+              <ScreenIcon name="map-pin" className="h-3 w-3 text-primary-deep" />
+              Kayonza pilot
             </p>
             <p className="mt-1 text-base font-black text-ink sm:text-lg">
-              <CountUp value={184500} suffix=" RWF" />
+              Maize &amp; beans
             </p>
             <p className="mt-1.5 text-[10px] font-semibold text-muted">
-              <span className="text-primary-deep">37</span> approved ·{" "}
-              <span className="text-amber">12</span> pending
+              <span className="text-primary-deep">Compare</span> · plan ·{" "}
+              <span className="text-amber">rotate</span>
             </p>
           </div>
         </div>

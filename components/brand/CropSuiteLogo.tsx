@@ -1,7 +1,7 @@
-import { TreePulseMark } from "./TreePulseMark";
+import { CropSuiteMark } from "./CropSuiteMark";
 
-/** Lockup: the mark plus the "TreePulse" wordmark. */
-export function TreePulseLogo({
+/** Lockup: the mark plus the "CropSuite" wordmark. */
+export function CropSuiteLogo({
   className = "",
   markClassName = "h-8 w-8",
   wordClassName = "text-lg",
@@ -12,11 +12,11 @@ export function TreePulseLogo({
 }) {
   return (
     <span className={`inline-flex items-center gap-2.5 text-primary-deep ${className}`}>
-      <TreePulseMark className={markClassName} />
+      <CropSuiteMark className={markClassName} />
       <span
         className={`font-extrabold tracking-tight text-ink ${wordClassName}`}
       >
-        Tree<span className="text-primary-deep">Pulse</span>
+        Crop<span className="text-primary-deep">Suite</span>
       </span>
     </span>
   );

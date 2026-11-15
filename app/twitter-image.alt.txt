@@ -1,1 +1,1 @@
-TreePulse — the Android field app for tree-planting farmers in Rwanda: map farm boundaries, register and monitor trees, and track verified RWF payouts.
+CropSuite — know what to plant, plan what comes next: a Rwanda-first crop-planning and rotation decision-support platform. Pilot: Kayonza, Rwanda; maize and common beans.

@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 /*
-  TreePulse landing page design tokens.
-  Colours are taken verbatim from the mobile app: TreePulse-App/src/theme/colors.ts
-  plus a few supporting shades used across the app screens (notifications, wallet card).
-  Every colour used on the page resolves back to one of these tokens.
+  CropSuite landing page design tokens.
+  Same token structure as the original TreePulse build of this page, with the
+  green scale moved to a darker forest range. Every colour used on the page
+  resolves back to one of these tokens.
 */
 :root {
   --color-bg: #f8faf8; /* colors.background */
   --color-surface: #ffffff; /* colors.surface */
-  --color-primary: #6eba6d; /* colors.primary */
-  --color-primary-deep: #4e8a4c; /* deep green used in app shadows */
-  --color-primary-strong: #16a34a; /* green used in notification badges */
-  --color-sage: #ebf4ea; /* wallet card background */
-  --color-mint: #dcfce7; /* notification icon background */
+  --color-primary: #3f8b43; /* brand green */
+  --color-primary-deep: #2e6b32; /* deep green for CTAs, links and the mark */
+  --color-primary-strong: #15803d; /* strong green for badges */
+  --color-sage: #e4efe2; /* soft green tint for icon tiles */
+  --color-mint: #d6ead9; /* light green tint */
   --color-ink: #0f172a; /* colors.textPrimary */
   --color-muted: #64748b; /* colors.textSecondary */
   --color-line: #e2e8f0; /* colors.border */
@@ -22,7 +22,7 @@
   --color-danger: #ef4444; /* colors.error */
 
   --shadow-soft: 0 20px 45px -20px rgba(15, 23, 42, 0.25);
-  --shadow-card: 0 12px 30px -12px rgba(78, 138, 76, 0.22);
+  --shadow-card: 0 12px 30px -12px rgba(46, 107, 50, 0.22);
   --shadow-phone: 0 40px 80px -24px rgba(15, 23, 42, 0.35);
 }
 
@@ -329,4 +329,111 @@ body {
     transform: none !important;
     filter: none !important;
   }
+}
+
+/* ======================================================================
+   CropSuite introduction (components/intro/IntroGate.tsx)
+
+   A full-screen layer shown BEFORE the landing page. Nothing here restyles
+   the landing page: the html[data-intro] hooks only lock scrolling and hold
+   the hero's on-load entrance animations until the introduction leaves, so
+   they play exactly as before once the page is revealed.
+   ====================================================================== */
+
+/* Pre-hydration guard: the layer only shows when the boot script (layout.tsx)
+   or the component has flagged the document. Returning visitors never flash. */
+html:not([data-intro]) .cs-intro {
+  display: none;
+}
+
+html[data-intro="pending"] body,
+html[data-intro="active"] body {
+  overflow: hidden;
+}
+
+html[data-intro="pending"] .tp-hero-item,
+html[data-intro="pending"] .tp-hero-mask > span,
+html[data-intro="pending"] .tp-hero-phone,
+html[data-intro="pending"] .tp-nav-in,
+html[data-intro="active"] .tp-hero-item,
+html[data-intro="active"] .tp-hero-mask > span,
+html[data-intro="active"] .tp-hero-phone,
+html[data-intro="active"] .tp-nav-in {
+  animation-play-state: paused;
+}
+
+.cs-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  opacity: 1;
+  transition: opacity 0.7s var(--ease-out-soft);
+}
+.cs-intro[data-leaving="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The film fills landscape screens edge to edge and is letterboxed in the
+   same white on portrait phones (the component sets data-fit). Its light-grey
+   stage (~#dedede at the corners, ~#f2f2f2 at the centre) is lifted to the page
+   white so the silhouettes sit directly on the page, like a 3D model. */
+.cs-intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: var(--color-surface);
+  filter: brightness(1.12) contrast(1.03);
+}
+.cs-intro-video[data-fit="contain"] {
+  object-fit: contain;
+}
+
+/* Soft white feather over the film's edges — hides the stage vignette. */
+.cs-intro-feather {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, var(--color-surface), transparent 14%, transparent 86%, var(--color-surface)),
+    linear-gradient(to bottom, var(--color-surface), transparent 12%, transparent 84%, var(--color-surface));
+  opacity: 0.9;
+}
+
+/* Poetic lines: black on the film's white negative space, gentle fades. */
+.cs-cue {
+  margin: 0;
+  color: var(--color-ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.28;
+  text-wrap: balance;
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  transition:
+    opacity 230ms ease,
+    transform 230ms ease;
+}
+.cs-cue[data-active="true"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 250ms ease,
+    transform 250ms var(--ease-out-soft);
+}
+
+.cs-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--color-primary);
+  transform-origin: left center;
+  transform: scaleX(0);
 }
