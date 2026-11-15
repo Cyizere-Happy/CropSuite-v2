@@ -5,7 +5,6 @@ import {
   useEffect,
   useRef,
   useState,
-  useSyncExternalStore,
 } from "react";
 import captions from "@/public/intro-captions.json";
 import {
@@ -15,8 +14,8 @@ import {
 } from "@/lib/intro-events";
 
 /**
- * The CropSuite introduction — a full-screen layer shown BEFORE the landing
- * page on the first visit of a browser session.
+ * The CropSuite introduction — a full-screen layer opened on demand from
+ * the landing page.
  *
  *  - Plays `cropsuite_seed_of_hope_50s.mp4` edge to edge on landscape screens
  *    (object-fit: cover) and letterboxed in white on portrait phones. The film's
@@ -30,7 +29,7 @@ import {
  *    white negative space, with or without sound. Independent captions bar,
  *    Skip at any moment (also Esc), and a working "Continue" fallback if the
  *    file fails to load.
- *  - Remembers completion in sessionStorage; `Replay our story` re-opens it.
+ *  - Remembers completion in sessionStorage; `Watch our story` opens it again.
  *
  * Cue sync reads `video.currentTime` on `timeupdate`, `seeked` and a
  * requestAnimationFrame loop while playing, so the text stays accurate through
@@ -73,24 +72,6 @@ function setHtmlState(value: "active" | "leaving" | null) {
   else el.removeAttribute("data-intro");
 }
 
-function hasSeen(): boolean {
-  try {
-    return sessionStorage.getItem(INTRO_SESSION_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Read once per page life. Served through useSyncExternalStore so the server
- * markup (intro present) hydrates cleanly and returning visitors drop the
- * layer on the very first client render.
- */
-let seenSnapshot: boolean | null = null;
-const getSeenSnapshot = () => (seenSnapshot ??= hasSeen());
-const getServerSeenSnapshot = () => false;
-const subscribeNoop = () => () => {};
-
 function markSeen() {
   try {
     sessionStorage.setItem(INTRO_SESSION_KEY, "1");
@@ -112,15 +93,9 @@ export function IntroGate({
   videoSrc: string;
   posterSrc: string;
 }) {
-  const seenThisSession = useSyncExternalStore(
-    subscribeNoop,
-    getSeenSnapshot,
-    getServerSeenSnapshot,
-  );
-  const autoStart = !seenThisSession;
-  /** Incremented by "Replay our story". */
+  // The film opens only when a visitor explicitly chooses to watch it.
   const [replays, setReplays] = useState(0);
-  const started = autoStart || replays > 0;
+  const started = replays > 0;
 
   const [phase, setPhase] = useState<Phase>("active");
   const [muted, setMuted] = useState(false);
@@ -275,13 +250,13 @@ export function IntroGate({
   }, [started, replays, phase, videoReady, failed]);
 
   useEffect(() => {
-    if (phase !== "active") return;
+    if (!started || phase !== "active") return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") finish();
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [phase, finish]);
+  }, [started, phase, finish]);
 
   const syncTime = useCallback(() => {
     const video = videoRef.current;

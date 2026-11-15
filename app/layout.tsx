@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
-import { INTRO_SESSION_KEY } from "@/lib/intro-events";
 
 /**
  * Jost is the typeface used throughout the product and this page.
@@ -61,23 +60,12 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-/**
- * Runs before first paint on the home page: when this browser session has not
- * watched the CropSuite introduction yet, flag <html data-intro="pending"> so the intro
- * layer is visible immediately and the hero's entrance animations wait for it.
- * Returning visitors in the same session never see the layer flash.
- */
-const introBootScript = `try{if(location.pathname==="/"&&sessionStorage.getItem(${JSON.stringify(
-  INTRO_SESSION_KEY,
-)})!=="1")document.documentElement.setAttribute("data-intro","pending")}catch(e){}`;
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={`${jost.variable} h-full`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: introBootScript }} />
         <noscript>
           {/* Without JS the scroll-reveal wrappers never toggle — show everything,
               and never show the (JS-driven) introduction layer. */}

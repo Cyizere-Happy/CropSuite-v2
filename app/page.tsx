@@ -1,43 +1,25 @@
+import Image from "next/image";
+import Link from "next/link";
 import { IntroGate } from "@/components/intro/IntroGate";
-import { Nav } from "@/components/site/Nav";
-import { Hero } from "@/components/site/Hero";
-import { Screenshots } from "@/components/site/Screenshots";
-import { FarmerStory, KayonzaStory, EvidenceStory, Methodology, StoryCta } from "@/components/site/Story";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { HeroBackdrop } from "@/components/site/decor";
+import { ReplayIntroButton } from "@/components/intro/ReplayIntroButton";
+import { LandingNav } from "@/components/site/LandingNav";
+import { ProductShowcase } from "@/components/site/ProductShowcase";
+import { EvidenceEngine } from "@/components/site/EvidenceEngine";
+import { CropSuiteLogo } from "@/components/brand/CropSuiteLogo";
 import { introAssets } from "@/lib/intro";
+import "@/components/site/landing.css";
+
+function Branch({ className = "" }: { className?: string }) {
+  return <svg className={className} viewBox="0 0 180 240" fill="none" aria-hidden="true"><g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M90 234C83 168 98 89 141 13M91 190c-18-12-38-33-48-61M91 159c22-10 42-27 55-47M95 126C77 111 64 90 57 67M107 91c16-4 34-14 46-28"/><path d="M70 171c-27-3-38-20-37-42 24 3 37 18 37 42ZM105 151c4-24 20-38 42-39-3 25-19 39-42 39ZM82 112c-22-6-29-23-25-45 22 6 30 24 25 45ZM112 84c9-20 25-27 42-21-9 20-25 27-42 21ZM119 59c-5-23 4-38 22-46 6 22-3 38-22 46Z"/></g></svg>;
+}
 
 export default function Home() {
   const intro = introAssets();
-
-  return (
-    <>
-      {/* Cinematic introduction — a layer BEFORE the landing page, shown once per
-          browser session. The landing page below is unchanged. */}
-      <IntroGate videoSrc={intro.videoSrc} posterSrc={intro.posterSrc} />
-
-      <a
-        href="#home"
-        className="sr-only rounded-lg bg-primary-deep px-4 py-2 text-sm font-bold text-white focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"
-      >
-        Skip to content
-      </a>
-
-      {/* The organic backdrop sits behind the transparent nav, as in the reference. */}
-      <div className="relative">
-        <HeroBackdrop />
-        <Nav />
-        <main>
-          <Hero />
-          <FarmerStory />
-          <KayonzaStory />
-          <EvidenceStory />
-          <Screenshots />
-          <Methodology />
-          <StoryCta />
-        </main>
-      </div>
-      <SiteFooter />
-    </>
-  );
+  return <div className="cs-landing"><IntroGate videoSrc={intro.videoSrc} posterSrc={intro.posterSrc} /><a href="#main" className="landing-skip">Skip to content</a><LandingNav /><main id="main">
+    <section id="home" className="landing-hero"><div className="landing-wrap landing-hero-grid"><div className="landing-hero-copy"><div className="landing-overline"><span/> A LITTLE MORE CLARITY, EVERY SEASON</div><h1><span>A better next crop</span> <em>starts here.</em></h1><p>Know what suits your farm.<br/>Plan what grows next.</p><div className="landing-action"><Link href="/onboarding/journey/farm" className="landing-primary">Get Started <span aria-hidden="true">↗</span></Link><small>No account needed.</small></div><div className="landing-hero-note"><span className="landing-note-icon">✳</span><span>Thoughtful farming starts<br/>with a better question.</span></div></div><ProductShowcase /></div><div className="landing-bottom-line"><span>GROW WITH MORE CONFIDENCE</span><span>01 — 03</span></div></section>
+    <section id="how-it-works" className="landing-how"><div className="landing-wrap"><div className="landing-section-heading"><div><p className="landing-kicker">A LITTLE GUIDANCE GOES A LONG WAY</p><h2>Farming, <em>made clearer.</em></h2></div><span className="landing-heading-mark" aria-hidden="true">✳</span></div><div className="landing-steps"><article className="landing-step"><div className="step-art step-map"><div className="map-illustration"><div className="map-road road-one"/><div className="map-road road-two"/><span className="map-pin">●</span><div className="map-card"><span>YOUR FARM</span><strong>A place to begin.</strong></div></div></div><div className="step-title"><span>01</span><h3>Tell us about your farm.</h3></div><p>Share your location and the crops you have in mind.</p></article><article className="landing-step"><div className="step-art step-options"><div className="option-card"><div className="option-thumb"><Image src="/farmer/crops/maize.webp" alt="" fill sizes="120px" /></div><div><small>YOUR OPTIONS</small><strong>Explore maize</strong><span>Weather · Soil · Rotation</span></div><b>↗</b></div><div className="option-card second"><div className="option-thumb"><Image src="/farmer/crops/common-beans.webp" alt="" fill sizes="120px" /></div><div><small>ANOTHER OPTION</small><strong>Explore beans</strong><span>Compare what matters</span></div><b>↗</b></div></div><div className="step-title"><span>02</span><h3>Understand your options.</h3></div><p>Explore your choices with environmental context.</p></article><article className="landing-step"><div className="step-art step-rotation"><div className="rotation-mini"><small>AN EXAMPLE GROWING PLAN</small><div>{[{name:"Maize",src:"maize"},{name:"Beans",src:"common-beans"},{name:"Sorghum",src:"sorghum"}].map((crop,i)=><div key={crop.name}><span className="rotation-mini-image"><Image src={`/farmer/crops/${crop.src}.webp`} alt="" fill sizes="80px" /></span><strong>{crop.name}</strong><small>SEASON {i+1}</small></div>)}</div><span className="rotation-mini-line"/></div></div><div className="step-title"><span>03</span><h3>Plan what grows next.</h3></div><p>Look ahead with a provisional crop rotation plan.</p></article></div></div></section>
+    <EvidenceEngine />
+    <section className="landing-story"><div className="landing-wrap landing-story-inner"><div><p className="landing-kicker">THE STORY BEHIND CROPSUITE</p><h2>Every seed holds<br/><em>a little hope.</em></h2><ReplayIntroButton className="landing-watch"><span aria-hidden="true">▶</span> Watch our story <span>↗</span></ReplayIntroButton></div><div className="landing-story-poster"><Image src={intro.posterSrc} alt="" fill sizes="(max-width: 700px) 80vw, 480px" /></div></div></section>
+    <section className="landing-final"><Branch className="landing-final-branch branch-a"/><Branch className="landing-final-branch branch-b"/><div className="landing-final-inner"><p>GROW A LITTLE FURTHER</p><h2>Your next season starts with<br/><em>a better decision.</em></h2><Link className="landing-final-button" href="/onboarding/journey/farm">Plan my crops <span aria-hidden="true">↗</span></Link></div></section>
+    </main><footer className="landing-footer landing-wrap"><CropSuiteLogo markClassName="h-8 w-8" wordClassName="text-lg"/><p>Farming, made clearer.</p><span>© {new Date().getFullYear()} CropSuite</span></footer></div>;
 }
