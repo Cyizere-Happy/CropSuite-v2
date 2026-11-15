@@ -32,7 +32,7 @@ export function Onboarding({ step, editing }: { step: Step; editing: boolean }) 
   function next(event: FormEvent) {
     event.preventDefault();
     if (step === "review") {
-      if (completePlan()) router.push("/dashboard");
+      if (completePlan()) router.push("/dashboard/crop-planning");
       return;
     }
     if (Object.keys(validateStep(step, draft)).length > 0) {
@@ -77,7 +77,7 @@ export function Onboarding({ step, editing }: { step: Step; editing: boolean }) 
               {step === "review" ? <Review draft={draft} /> : <StepForm step={step} draft={draft} update={updateDraft} errors={errors} />}
               <div className="cs-step-actions">
                 <Link className="cs-button cs-button-secondary" href={previous}><Icon name="left" />{editing ? "Back to review" : "Back"}</Link>
-                <button className="cs-button cs-button-primary" type="submit">{step === "review" ? "Continue to My Dashboard" : editing ? "Save and return to review" : "Continue"}<Icon name="right" /></button>
+                <button className="cs-button cs-button-primary" type="submit">{step === "review" ? "See My Planting Options" : editing ? "Save and return to review" : "Continue"}<Icon name="right" /></button>
               </div>
             </form>
           )}

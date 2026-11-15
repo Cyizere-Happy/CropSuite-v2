@@ -1,3 +1,5 @@
+import type { GuidedAnswers } from "./guided";
+
 export const categories = ["Cereals", "Legumes", "Roots and tubers", "Vegetables", "Fruits and perennial crops", "Cash crops"] as const;
 export type CropCategory = (typeof categories)[number];
 
@@ -18,7 +20,7 @@ export const crops = categories.flatMap((category) =>
       id,
       name,
       image: "/farmer/crops/" + id + ".webp",
-      coverage: name === "Maize" || name === "Common beans" ? "Pilot evaluation scope" : "Assessment coverage pending",
+      coverage: name === "Maize" || name === "Common beans" ? "Kayonza pilot crop" : "Explore this crop",
     };
   }),
 );
@@ -45,13 +47,16 @@ export const steps = [
 ] as const;
 
 export type Step = (typeof steps)[number]["id"];
-export type AssessmentStatus = "Assessment not yet connected";
+export type AssessmentStatus = "Example plan ready";
 
 export interface FarmerProfile {
   displayName?: string;
 }
 
 export interface FarmLocation {
+  country?: string;
+  province?: string;
+  precision?: "farm" | "area";
   district: string;
   sector: string;
   village: string;
@@ -104,6 +109,7 @@ export interface FarmerOnboardingDraft {
   history: CropHistory;
   goals: string[];
   resources: FarmerResources;
+  guide: GuidedAnswers;
 }
 
 export interface FarmField {
@@ -125,6 +131,7 @@ export const blankDraft: FarmerOnboardingDraft = {
   history: { recent: "", previous: "", sequence: "", outcome: "", problems: "" },
   goals: [],
   resources: { irrigation: "", budget: "", seeds: "", soil: "", drainage: "", inputs: "" },
+  guide: { water: "", observations: [], resources: "", flexible: false, harvestMonth: "", example: false },
 };
 
 export function cropNames(selection: CropSelection) {
@@ -142,7 +149,7 @@ export function toField(draft: FarmerOnboardingDraft): FarmField {
     crops: cropNames(draft.selection),
     planting: draft.planting,
     irrigation: draft.resources.irrigation,
-    assessment: "Assessment not yet connected",
+    assessment: "Example plan ready",
   };
 }
 

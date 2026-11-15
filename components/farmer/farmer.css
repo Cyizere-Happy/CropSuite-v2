@@ -373,57 +373,70 @@
 .cs-expanded-map { border: 0; padding: 0; border-radius: 16px; margin: auto; max-width: min(96vw, 1600px); width: 96vw; background: #233b20; }
 .cs-expanded-map::backdrop { background: #0a1a12b9; }
 .cs-expanded-map .cs-field-map { height: 92dvh; }
+.cs-real-map { background: #e3ebdc; }
+.cs-map-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: -1; }
+.cs-real-map .cs-map-top { pointer-events: none; }
+.cs-real-map .cs-map-top button { pointer-events: auto; }
+.cs-real-map .cs-map-export svg { width: 16px; height: 16px; }
+.cs-real-map .cs-map-bottom small { pointer-events: auto; }
+.cs-real-map .cs-map-bottom a { color: white; text-decoration: underline; }
+.cs-real-map .cs-field-assessment > svg { width: 32px; height: 32px; color: #c5efa1; }
+.cs-map-example-note { font-size: .7rem; color: #d2e2ca; margin-top: 9px; }
+.cs-climate-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #165638; }
+.cs-climate-heading div { display: grid; }
+.cs-climate-heading span { font-size: .77rem; color: #66796a; }
+.cs-climate-heading strong { font-size: 2rem; line-height: 1.2; }
+.cs-climate-heading strong small { font-size: .8rem; font-weight: 500; }
+.cs-climate-heading > svg { width: 34px; height: 34px; }
+.cs-planting-result { margin-bottom: 16px; padding: clamp(20px, 3vw, 30px); border: 1px solid #cce3c8; border-radius: 18px; background: #f0f7ed; color: #21432d; }
+.cs-result-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; margin-bottom: 10px; border-radius: 12px; background: #175b3a; color: #fff; }
+.cs-result-banner:hover { background: #104d2f; }
+.cs-result-banner span:first-child { display: grid; gap: 2px; }
+.cs-result-banner small { color: #d7eddb; font-size: .78rem; }
+.cs-result-banner > span:last-child { font-size: 1.4rem; }
+.cs-result-heading { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.cs-result-heading > div > span, .cs-result-tag { color: #39764d; font-size: .72rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.cs-result-heading h2 { margin: 5px 0; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.15; color: #173c28; }
+.cs-result-heading p { color: #5b7060; }
+.cs-result-season { padding: 8px 12px; border-radius: 9px; background: #d7ecd1; color: #205e37; font-size: .85rem; font-weight: 700; }
+.cs-result-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.cs-result-card { overflow: hidden; border: 1px solid #d9e9d6; border-radius: 14px; background: white; }
+.cs-result-card > img { display: block; width: 100%; height: 150px; object-fit: cover; }
+.cs-result-card > div { padding: 18px; }
+.cs-result-card h3 { margin: 6px 0 9px; color: #193f2a; font-size: 1.22rem; line-height: 1.2; }
+.cs-result-card p { color: #52665a; line-height: 1.55; font-size: .9rem; }
+.cs-result-card .cs-result-reason { margin-top: 13px; padding-top: 12px; border-top: 1px solid #e8efe5; }
+.cs-result-reason strong { color: #27593a; }
+.cs-result-evidence { margin-top: 14px; padding: 14px; border-radius: 10px; background: #f2f8ef; }
+.cs-result-evidence > strong, .cs-result-context > strong { color: #225438; font-size: .87rem; }
+.cs-result-evidence p + p { margin-top: 9px; }
+.cs-result-sources { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; }
+.cs-result-sources a, .cs-result-context a { color: #24613c; font-size: .78rem; font-weight: 650; text-decoration: underline; }
+.cs-result-context { margin-top: 14px; padding: 15px; background: #fff; border: 1px solid #d9e9d6; border-radius: 12px; }
+.cs-result-context p { color: #52665a; margin: 5px 0; font-size: .88rem; line-height: 1.5; }
+.cs-result-preference { display: flex; align-items: center; }
+.cs-result-preference a { display: inline-flex; margin-top: 12px; }
+.cs-result-footnote { margin-top: 16px; color: #53695a; font-size: .8rem; line-height: 1.55; }
+.cs-result-footnote a { color: #245f3b; text-decoration: underline; }
+@media (max-width: 600px) { .cs-result-cards { grid-template-columns: 1fr; } .cs-result-card > img { height: 140px; } }
+.cs-rain-chart { height: 95px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; align-items: end; padding-top: 8px; }
+.cs-rain-chart > div { height: 100%; display: flex; flex-direction: column; justify-content: end; align-items: center; gap: 4px; }
+.cs-rain-chart span { width: 100%; max-width: 18px; background: #76b884; border-radius: 4px 4px 0 0; min-height: 3px; }
+.cs-rain-chart small { font-size: .65rem; color: #718073; }
 
 /* Weather, resource and activity panels */
 .cs-panel { background: white; border-radius: 16px; border: 1px solid #edf0eb; min-width: 0; padding: 13px; }
-.cs-panel-heading, .cs-table-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 9px; }
-.cs-panel-heading h2, .cs-table-heading h2 { font-weight: 650; font-size: .93rem; color: #202b24; line-height: 1.2; }
+.cs-simple-panel { display: grid; gap: 10px; padding: 18px; }
+.cs-simple-panel h2 { font-size: 1rem; font-weight: 650; }
+.cs-simple-panel p { color: var(--farm-muted); font-size: .9rem; }
+.cs-simple-panel .cs-text-link { justify-self: start; }
+.cs-table-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 9px; }
+.cs-table-heading h2 { font-weight: 650; font-size: .93rem; color: #202b24; line-height: 1.2; }
 .cs-icon-link { width: 29px; height: 29px; border-radius: 50%; background: #f4f6f3; color: #44524a; display: inline-grid; place-items: center; flex: 0 0 auto; }
 .cs-icon-link:hover { background: #e8f2e7; color: var(--farm-deep); }
 .cs-icon-link svg { width: 15px; height: 15px; }
 .cs-weather-location { display: flex; gap: 6px; align-items: center; font-weight: 640; font-size: .89rem; overflow-wrap: anywhere; }
 .cs-weather-location svg { width: 17px; height: 17px; }
-.cs-weather-current { display: flex; gap: 8px; align-items: center; justify-content: space-between; margin: 12px 3px; }
-.cs-temperature { font-size: clamp(2.8rem, 5vw, 4.55rem); font-weight: 540; letter-spacing: -.065em; line-height: .97; }
-.cs-weather-current > div:last-child { text-align: right; }
-.cs-weather-current > div > span { display: inline-flex; gap: 5px; align-items: center; font-size: .91rem; font-weight: 650; }
-.cs-weather-current svg { width: 17px; height: 17px; }
-.cs-weather-current p { font-size: .78rem; color: var(--farm-muted); margin-top: 2px; }
-.cs-weather-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: 11px; background: #f4f6f3; padding: 9px 0; }
-.cs-weather-metrics > div { display: grid; justify-items: center; gap: 3px; position: relative; padding-inline: 3px; color: #4a5b4e; }
-.cs-weather-metrics > div + div::before { position: absolute; content: ""; left: 0; top: 15%; height: 70%; width: 1px; background: #e3e8e1; }
-.cs-weather-metrics svg { width: 17px; height: 17px; color: #2e4135; }
-.cs-weather-metrics dt { text-align: center; font-size: .77rem; line-height: 1.1; }
-.cs-weather-metrics dd { font-weight: 650; font-size: 1.07rem; color: #27382d; line-height: 1.05; }
-.cs-period-control { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 2px; border-radius: 20px; background: #f3f5f2; }
-.cs-period-control button { padding: 4px 3px; border-radius: 18px; font-size: .8rem; font-weight: 620; }
-.cs-period-control button[aria-pressed="true"] { background: white; color: var(--farm-deep); box-shadow: 0 1px 4px #182c1810; }
-.cs-resource-body { display: grid; grid-template-columns: 1.2fr minmax(90px, 1fr); align-items: center; gap: 3px; margin-top: 12px; }
-.cs-resource-body .cs-panel-note { margin-top: 9px; }
-.cs-chart-legend { padding: 0; margin: 0; list-style: none; display: grid; gap: 7px; }
-.cs-chart-legend li { display: flex; align-items: center; gap: 5px; color: #536256; font-size: .81rem; line-height: 1.15; }
-.cs-chart-legend i { width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto; }
-.cs-donut { position: relative; width: 100%; max-width: 178px; justify-self: end; aspect-ratio: 1; }
-.cs-donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.cs-donut circle { fill: none; stroke-width: 19; stroke-linecap: butt; transition: stroke-dasharray .2s, stroke-dashoffset .2s; }
-.cs-donut > span { position: absolute; inset: 0; display: grid; place-items: center; font-size: .74rem; color: #546759; font-weight: 620; }
-.cs-panel-note { color: #5c6b62; font-size: .73rem; margin-top: 4px; }
-.cs-heatmap { display: grid; grid-template-columns: 30px repeat(7, minmax(0, 1fr)); gap: 3px; align-items: center; }
-.cs-heatmap > span { color: #617064; font-size: .64rem; text-align: center; }
-.cs-heatmap > .cs-heat-time { text-align: left; white-space: nowrap; }
-.cs-heatmap i { display: block; height: clamp(15px, 2.5vh, 25px); border-radius: 5px; }
-.cs-heatmap i[data-level="0"], .cs-heatmap-footer i[data-level="0"] { background: #effbdc; }
-.cs-heatmap i[data-level="1"], .cs-heatmap-footer i[data-level="1"] { background: #d3f8a6; }
-.cs-heatmap i[data-level="2"], .cs-heatmap-footer i[data-level="2"] { background: #a9eb70; }
-.cs-heatmap i[data-level="3"], .cs-heatmap-footer i[data-level="3"] { background: #24875d; }
-.cs-heatmap i[data-level="4"], .cs-heatmap-footer i[data-level="4"] { background: #104f37; }
-.cs-heatmap-footer { display: flex; justify-content: space-between; gap: 3px; flex-wrap: wrap; color: #5d6d61; margin-top: 8px; font-size: .68rem; }
-.cs-heatmap-footer > span:last-child { display: flex; align-items: center; gap: 3px; }
-.cs-heatmap-footer i { width: 9px; height: 8px; border-radius: 1px; }
-.cs-analytics .cs-chart-legend { display: flex; gap: 8px; flex-wrap: wrap; }
-.cs-analytics .cs-chart-legend li { font-size: .73rem; }
-.cs-analytics-placeholder { height: 71px; display: grid; align-content: space-between; margin: 12px 0 4px; }
-.cs-analytics-placeholder i { background: #ecf2e9; height: 1px; }
 
 /* Field overview and dashboard sections */
 .cs-table-panel { padding: 12px; }
@@ -499,7 +512,6 @@
   .cs-sidebar { height: 100%; min-height: 0; overflow-y: auto; }
   .cs-dashboard-content { overflow: auto; scrollbar-width: none; }
   .cs-dashboard-table-column .cs-table-panel { min-height: 220px; }
-  .cs-weather { min-height: 232px; display: grid; align-content: space-between; }
 }
 
 @media (max-width: 1150px) {
@@ -509,8 +521,6 @@
 @media (max-width: 890px) {
   .cs-dashboard-grid { grid-template-columns: minmax(0, 1.6fr) minmax(245px, 1fr); }
   .cs-panel { padding: 11px; }
-  .cs-resource-body { grid-template-columns: 1.3fr 1fr; }
-  .cs-chart-legend li { font-size: .74rem; }
   .cs-setup-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 18px; }
   .cs-crop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -562,7 +572,6 @@
   .cs-dashboard-map-column { scroll-margin-top: 61px; }
   .cs-field-map, .cs-panel { border-radius: 12px; }
   .cs-dashboard-panels { gap: 8px; }
-  .cs-weather-current { margin-block: 9px; }
   .cs-map-top, .cs-map-bottom { padding: 9px; }
   .cs-field-details { left: 10px; right: auto; top: 58px; width: min(calc(100% - 61px), 280px); max-height: 54%; padding: 9px; }
   .cs-field-marker { left: 37%; top: 73%; max-width: 64%; }
@@ -574,7 +583,6 @@
   .cs-field-details dl > div { padding: 4px 0; }
   .cs-map-controls button { width: 37px; height: 35px; }
   .cs-map-export, .cs-map-field-select { min-height: 34px; }
-  .cs-donut { max-width: 145px; }
   .cs-table-scroll table { min-width: 0; display: block; }
   .cs-table-scroll thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .cs-table-scroll tbody, .cs-table-scroll tbody tr { display: block; }

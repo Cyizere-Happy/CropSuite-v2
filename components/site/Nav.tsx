@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { CropSuiteLogo } from "@/components/brand/CropSuiteLogo";
 import { containerClass, navLinks } from "@/lib/site-config";
 
@@ -50,12 +51,12 @@ export function Nav() {
           ))}
         </ul>
 
-        <a
-          href="/login"
+        <Link
+          href="/onboarding/journey/farm"
           className="hidden rounded-full bg-primary-deep px-5 py-2.5 text-[13px] font-bold text-white transition-colors hover:bg-[#244f27] md:inline-block"
         >
           Start Planning
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -89,13 +90,13 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        <a
-          href="/login"
+        <Link
+          href="/onboarding/journey/farm"
           onClick={() => setOpen(false)}
           className="mt-2 block rounded-full bg-primary-deep px-5 py-3 text-center text-sm font-bold text-white"
         >
           Start Planning
-        </a>
+        </Link>
       </div>
     </header>
   );

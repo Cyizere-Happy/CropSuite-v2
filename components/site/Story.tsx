@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { containerClass } from "@/lib/site-config";
 import { SectionReveal } from "./SectionReveal";
 
@@ -71,5 +72,5 @@ export function Methodology() {
 }
 
 export function StoryCta() {
-  return <section className="cs-story-section cs-story-cta"><div className={containerClass}><p className="cs-story-eyebrow">Your next season</p><h2>Your next season starts with understanding your field.</h2><p>Tell CropSuite what you’re planning, what grew before, and what matters most to you. Explore how that information can shape a better-informed plan.</p><div><a className="cs-story-button" href="/login">Explore My Farm <span aria-hidden="true">→</span></a><a className="cs-story-link" href="#overview">How CropSuite Works</a></div></div></section>;
+  return <section className="cs-story-section cs-story-cta"><div className={containerClass}><p className="cs-story-eyebrow">Your next season</p><h2>Your next season starts with understanding your field.</h2><p>Tell CropSuite what you’re planning, what grew before, and what matters most to you. Explore how that information can shape a better-informed plan.</p><div><Link className="cs-story-button" href="/onboarding/journey/farm">Explore My Farm <span aria-hidden="true">→</span></Link><a className="cs-story-link" href="#overview">How CropSuite Works</a></div></div></section>;
 }

@@ -63,7 +63,7 @@ export function AuthScreen({ mode }: { mode: "sign-in" | "sign-up" | "reset" }) 
           </form>
           {message && <p className="cs-auth-status" role="status">{message}</p>}
           <div className="cs-auth-demo">
-            <button className="cs-button cs-button-secondary" type="button" onClick={() => { startDemo(); router.push("/onboarding/crops"); }}>
+            <button className="cs-button cs-button-secondary" type="button" onClick={() => { startDemo(); router.push("/onboarding/journey/farm"); }}>
               Continue in Demo Mode <Icon name="right" />
             </button>
             <p>Your demo plan is saved in this browser.</p>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Dashboard } from "@/components/farmer/Dashboard";
+import { FarmerHome } from "@/components/farmer/FarmerHome";
 import { dashboardSections } from "@/lib/farmer/dashboard";
 
 type Props = PageProps<"/dashboard/[section]">;
@@ -18,6 +18,6 @@ export default async function DashboardSectionPage({ params }: Props) {
   const { section } = await params;
   const current = dashboardSections.find(({ id }) => id === section);
   if (!current) notFound();
-  return <Dashboard key={current.id} section={current.id} />;
+  return <FarmerHome key={current.id} section={current.id} />;
 }
 

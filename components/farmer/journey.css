@@ -1,0 +1,96 @@
+.cs-journey { min-height: 100dvh; background: #f7f9f4; }
+.cs-journey-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; padding: 14px max(24px, calc((100vw - 1120px) / 2)); background: white; border-bottom: 1px solid #e5ede3; }
+.cs-journey-header > span { color: #386247; background: #edf5e9; border-radius: 30px; padding: 6px 12px; font-size: .8rem; font-weight: 650; }
+.cs-journey-main { max-width: 920px; margin: 0 auto; padding: 32px 24px 80px; }
+.cs-journey-progress { margin-bottom: 45px; }
+.cs-journey-progress > div { display: flex; justify-content: space-between; gap: 10px; color: #486250; font-size: .88rem; }
+.cs-journey-progress progress { display: block; width: 100%; height: 6px; margin: 12px 0; accent-color: #276d48; }
+.cs-journey-progress ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; list-style: none; padding: 0; color: #637469; font-size: .8rem; }
+.cs-journey-progress li[aria-current="step"] { color: #17563a; font-weight: 700; }
+.cs-journey-progress li[data-done="true"] { color: #3c7050; }
+.cs-journey-title { max-width: 720px; margin-bottom: 36px; }
+.cs-journey-title > p, .cs-journey-kicker { color: #4c8059; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.cs-journey-title h1, .cs-journey-plan-intro h1, .cs-journey-thanks h1 { color: #183727; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.05; letter-spacing: -.045em; font-weight: 680; margin: 10px 0 14px; }
+.cs-journey-title > span, .cs-journey-plan-intro > p, .cs-journey-thanks > p { color: #596c5c; font-size: 1.07rem; line-height: 1.6; }
+.cs-journey-form { display: grid; gap: 32px; }
+.cs-journey-example { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; border-radius: 16px; padding: 22px; background: #eaf3e7; }
+.cs-journey-example strong { color: #194f33; font-size: 1.08rem; }
+.cs-journey-example p, .cs-journey-question > p { margin-top: 5px; color: #617264; font-size: .94rem; }
+.cs-journey-question { border: 0; min-width: 0; padding: 0; }
+.cs-journey-question legend, .cs-journey-plan-section h2, .cs-journey-summary h2 { color: #1c3e2a; font-size: clamp(1.35rem, 2.3vw, 1.75rem); font-weight: 650; line-height: 1.18; }
+.cs-journey-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 15px; }
+.cs-journey-choices button { min-height: 57px; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 13px 16px; border: 1px solid #d9e5d9; border-radius: 12px; background: white; text-align: left; color: #294936; }
+.cs-journey-choices button:hover { border-color: #77a985; }
+.cs-journey-choices button[aria-pressed="true"] { border-color: #327b4e; box-shadow: 0 0 0 1px #327b4e; background: #eef7eb; }
+.cs-journey-previous-crop { display: flex; align-items: center; gap: 11px; }
+.cs-journey-previous-crop img { width: 42px; height: 42px; object-fit: cover; border-radius: 8px; }
+.cs-journey-choices button > span { display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 auto; border-radius: 50%; background: #edf4eb; color: #2f7450; }
+.cs-journey-fields { display: grid; gap: 8px; max-width: 550px; margin-top: 16px; }
+.cs-journey-fields label { font-weight: 650; color: #294936; }
+.cs-journey-map-wrap { margin-top: 18px; }
+.cs-journey-map { display: block; height: 300px; width: 100%; border: 0; border-radius: 14px; background: #e7ede5; }
+.cs-journey-map-wrap > p { margin-top: 8px; }
+.cs-journey-result { border-color: #b9d9b6; background: #f1f8ed; }
+.cs-journey-result ol { padding-left: 22px; margin-top: 14px; color: #294936; line-height: 1.7; }
+.cs-journey-result strong { color: #1c5735; }
+.cs-journey-result-image { display: block; width: min(100%, 340px); height: 155px; object-fit: cover; border-radius: 12px; margin-top: 18px; }
+.cs-journey-fields label span { color: #64786a; font-size: .8rem; font-weight: 400; }
+.cs-journey-fields .cs-text-link { justify-self: start; min-height: 44px; }
+.cs-journey-fields .cs-journey-check { display: flex; align-items: center; gap: 8px; font-weight: 500; min-height: 44px; }
+.cs-journey-note { color: #5d7261; font-size: .87rem; line-height: 1.5; }
+.cs-journey-previous { margin-bottom: 20px; }
+.cs-journey-previous a { color: #20633e; text-decoration: underline; font-weight: 650; }
+.cs-journey-crops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.cs-journey-crop { position: relative; overflow: hidden; display: grid; text-align: left; border: 1px solid #dbe6da; border-radius: 14px; background: white; }
+.cs-journey-crop[aria-pressed="true"] { border-color: #327b4e; box-shadow: 0 0 0 1px #327b4e; background: #eff7ec; }
+.cs-journey-crop img { width: 100%; aspect-ratio: 2; object-fit: cover; }
+.cs-journey-crop > span { display: grid; padding: 12px; }
+.cs-journey-crop strong { color: #1d3c29; }
+.cs-journey-crop small { color: #657569; font-size: .77rem; }
+.cs-journey-crop b { position: absolute; top: 9px; right: 9px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: white; color: #24603f; }
+.cs-journey-crop[aria-pressed="true"] b { background: #24603f; color: white; }
+.cs-journey-extra { margin-top: 16px; }
+.cs-journey-extra summary, .cs-journey-plan-section summary { cursor: pointer; color: #20633e; font-weight: 650; }
+.cs-journey-summary, .cs-journey-plan-section { margin-top: 24px; padding: clamp(20px, 3.5vw, 32px); border: 1px solid #e0e9df; border-radius: 18px; background: white; }
+.cs-journey-summary > p, .cs-journey-plan-section > p:not(.cs-journey-kicker), .cs-journey-plan-section details p { color: #5c6e60; line-height: 1.6; margin-top: 12px; }
+.cs-journey-summary > a { margin-top: 18px; }
+.cs-journey-edit { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; }
+.cs-journey-edit a, .cs-journey-section-heading > a { color: #20633e; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; }
+.cs-journey-actions { display: flex; justify-content: space-between; gap: 12px; padding: 16px 0; }
+.cs-journey-plan-intro { margin-bottom: 30px; }
+.cs-journey-plan-intro > span { display: inline-block; padding: 8px 12px; background: #eef5e9; border-radius: 10px; color: #45654b; font-size: .84rem; }
+.cs-journey-section-heading { display: flex; justify-content: space-between; align-items: start; gap: 15px; }
+.cs-journey-summary-list { margin-top: 15px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 25px; }
+.cs-journey-summary-list div { border-top: 1px solid #edf1eb; padding-top: 9px; overflow-wrap: anywhere; }
+.cs-journey-summary-list dt { color: #64786a; font-size: .82rem; }
+.cs-journey-summary-list dd { font-weight: 600; color: #294936; }
+.cs-journey-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+.cs-journey-options article { overflow: hidden; border: 1px solid #e0e9df; border-radius: 14px; }
+.cs-journey-options img { width: 100%; height: 135px; object-fit: cover; }
+.cs-journey-options article > div { padding: 18px; }
+.cs-journey-options h3 { font-size: 1.3rem; font-weight: 650; color: #1b4c30; }
+.cs-journey-options article > div > p { color: #68786b; margin: 4px 0 12px; }
+.cs-journey-climate { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.cs-journey-climate > div { display: grid; gap: 5px; padding: 15px; border-left: 3px solid #a8cf9c; background: #f5f9f2; }
+.cs-journey-climate span, .cs-rotation small { color: #5c6e60; font-size: .87rem; }
+.cs-journey-plan-section .cs-rotation { margin-top: 22px; }
+.cs-journey-crop-unknown { width: 100%; aspect-ratio: 2; border-radius: 10px; background: #edf4e9; }
+.cs-journey-plan-section > button, .cs-journey-plan-section > a { margin-top: 15px; }
+.cs-journey-science details { padding: 14px 0; border-top: 1px solid #edf1eb; }
+.cs-journey-science h2 { margin-bottom: 15px; }
+.cs-journey-science a { color: #20633e; text-decoration: underline; }
+.cs-journey-thanks { max-width: 670px; margin: 10vh auto; text-align: center; }
+.cs-journey-thanks > span { display: inline-flex; margin-bottom: 25px; }
+.cs-journey-thanks > p { margin-top: 14px; }
+.cs-journey-thanks > div { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 24px 0 12px; }
+.cs-journey-thanks small { color: #637469; }
+@media (max-width: 600px) {
+  .cs-journey-main { padding: 24px 16px 64px; }
+  .cs-journey-progress { margin-bottom: 32px; }
+  .cs-journey-progress ol { font-size: .68rem; }
+  .cs-journey-choices, .cs-journey-options { grid-template-columns: 1fr; }
+  .cs-journey-crops, .cs-journey-climate, .cs-journey-summary-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-journey-example .cs-button { width: 100%; }
+  .cs-journey-actions { position: sticky; bottom: 0; z-index: 2; background: #f7f9f4; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .cs-journey-actions .cs-button { min-height: 48px; }
+}

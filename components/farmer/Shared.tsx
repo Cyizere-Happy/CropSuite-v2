@@ -30,8 +30,21 @@ export function Notice({ children }: { children: ReactNode }) {
   return <div className="cs-notice"><Icon name="info" /> <div>{children}</div></div>;
 }
 
+const optionLabels: Record<string, string> = {
+  "Available": "Yes",
+  "Limited or seasonal": "Sometimes",
+  "Unavailable": "No",
+  "Can obtain inputs": "Yes",
+  "Limited access": "Sometimes",
+  "Cannot obtain inputs": "No",
+};
+
+export function displayOption(value: string) {
+  return optionLabels[value] || value;
+}
+
 export function Options({ options, placeholder = "Choose an option" }: { options: readonly string[]; placeholder?: string }) {
-  return <><option value="">{placeholder}</option>{options.map((option) => <option key={option}>{option}</option>)}</>;
+  return <><option value="">{placeholder}</option>{options.map((option) => <option key={option} value={option}>{displayOption(option)}</option>)}</>;
 }
 
 export function ChoiceCard({ label, description, icon, selected, onClick }: {

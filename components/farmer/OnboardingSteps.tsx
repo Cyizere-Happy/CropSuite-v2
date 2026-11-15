@@ -110,7 +110,7 @@ function CropStep({ draft, update, errors }: StepProps) {
           <Icon name={customOpen ? "minus" : "plus"} /> My crop isn&apos;t listed
         </button>
         {customOpen && <InputField label="Crop name" name="custom" value={selection.custom} change={(custom) => change({ custom })} optional placeholder="Enter another crop name" />}
-        {selection.custom.trim() && <small>Assessment coverage pending</small>}
+        {selection.custom.trim() && <small>Added to your example plan</small>}
       </div>
       <fieldset id="crop-suggestions" className="cs-card cs-radio-card" aria-describedby={errors.suggestions ? "suggestions-error" : undefined}>
         <legend>Would you like us to suggest other crops?</legend>
@@ -119,7 +119,7 @@ function CropStep({ draft, update, errors }: StepProps) {
         ))}
         {errors.suggestions && <FieldError name="suggestions">{errors.suggestions}</FieldError>}
       </fieldset>
-      <Notice>Maize and common beans are in the proposed Kayonza evaluation scope, pending source validation. Crop choices record your interests for planning.</Notice>
+      <Notice>Explore your chosen crops using an example based on Kayonza’s climate.</Notice>
     </>
   );
 }
@@ -153,7 +153,7 @@ function LocationStep({ draft, update, errors }: StepProps) {
           <InputField label="Map pin coordinates" name="pin" value={location.pin} change={(value) => change("pin", value)} maxLength={48} error={errors.pin} optional hint="Paste latitude, longitude from a map you use." />
         </div>
       </div>
-      <Notice>{outside ? "You can save a plan outside Kayonza. Agricultural assessment coverage for this location is pending." : "Kayonza is the initial pilot district. Agricultural assessment is pending source validation and integration."}</Notice>
+      <Notice>{outside ? "You can save a plan outside Kayonza. Climate examples use the Kayonza reference area." : "Kayonza is our first pilot district. Your example plan uses local climate references."}</Notice>
     </>
   );
 }
@@ -245,13 +245,13 @@ function ResourcesStep({ draft, update, errors }: StepProps) {
   return (
     <>
       <div className="cs-card cs-form-card">
-        <div className="cs-card-heading"><span><Icon name="drop" /></span><div><h2>Water and planting resources</h2><p>Rainfed and irrigated farms can have different needs. Available inputs can shape what is practical.</p></div></div>
+        <div className="cs-card-heading"><span><Icon name="drop" /></span><div><h2>Water and supplies</h2><p>Tell us what you can use to grow your crops. You can leave anything blank.</p></div></div>
         <div className="cs-form-grid">
-          <SelectField label="Irrigation availability" name="irrigation" value={resources.irrigation} change={(value) => change("irrigation", value)} choices={irrigationChoices} optional />
+          <SelectField label="Can you water your crops when it doesn't rain?" name="irrigation" value={resources.irrigation} change={(value) => change("irrigation", value)} choices={irrigationChoices} optional />
           <InputField label="Approximate farm area (ha)" name="area" value={draft.location.area}
             change={(area) => update((current) => ({ ...current, location: { ...current.location, area } }))} error={errors.area} optional type="number" min="0.0001" step="any" />
           <InputField label="Planting budget (RWF)" name="budget" value={resources.budget} change={(value) => change("budget", value)} error={errors.budget} optional type="number" min="0" step="any" />
-          <SelectField label="Ability to obtain inputs" name="inputs" value={resources.inputs} change={(value) => change("inputs", value)} choices={inputChoices} optional />
+          <SelectField label="Can you get the supplies you need?" name="inputs" value={resources.inputs} change={(value) => change("inputs", value)} choices={inputChoices} optional />
         </div>
         <NotesField label="Seeds already available" name="seeds" value={resources.seeds} change={(value) => change("seeds", value)} placeholder="List any seeds you already have, or enter “I don’t know”." />
       </div>

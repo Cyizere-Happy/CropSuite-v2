@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
 export default function PlanPage() {
-  redirect("/onboarding/crops");
+  redirect("/onboarding/journey/farm");
 }
 

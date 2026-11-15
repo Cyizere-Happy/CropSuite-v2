@@ -14,8 +14,9 @@ import { FieldWorkspace, type FieldView } from "./FieldWorkspace";
 import { FieldTable } from "./FieldTable";
 import { Icon } from "./Icon";
 import { planSections } from "./Review";
-import { EmptyState, Field, LoadingState, Notice } from "./Shared";
+import { displayOption, EmptyState, Field, LoadingState, Notice } from "./Shared";
 import { CropComparison, EvidenceExplanation, RotationExample } from "./PlanningExamples";
+import { PlantingResult } from "./PlantingResult";
 
 function downloadPlan(draft: FarmerOnboardingDraft) {
   const data = new Blob([JSON.stringify({ version: 1, plan: draft }, null, 2)], { type: "application/json" });
@@ -75,16 +76,17 @@ function DashboardOverview({ draft, field }: { draft: FarmerOnboardingDraft; fie
     <main className="cs-dashboard-grid">
       <h1 className="sr-only">Farmer dashboard</h1>
       <div className="cs-dashboard-map-column" id="field-workspace">
+        <Link className="cs-result-banner" href="/dashboard/crop-planning"><span><strong>Your planting options are ready</strong><small>See your crops, season and another option</small></span><span aria-hidden="true">→</span></Link>
         <FieldWorkspace field={field} view={view} setView={setView} exportPlan={() => downloadPlan(draft)} />
       </div>
-      <div className="cs-dashboard-table-column"><FieldTable field={field} showDetails={() => {
+      <div className="cs-dashboard-table-column"><PlantingResult draft={draft} /><FieldTable field={field} showDetails={() => {
         setView("details");
         document.getElementById("field-workspace")?.scrollIntoView({ block: "start" });
-      }} /><section className="cs-panel cs-home-plan"><h2>My farm</h2><DataRows rows={[["Location", planSections(draft)[1].rows[0][1]], ["Preferred crops", field.crops.join(", ")], ["Previous crop", draft.history.recent], ["Water access", draft.resources.irrigation], ["Your priorities", draft.goals.join(", ")]]} /><Link className="cs-text-link" href="/onboarding/review">Edit farm information <Icon name="right" /></Link></section><section className="cs-panel cs-home-plan"><h2>My planting plan</h2><p>Explore how your field details can inform future choices.</p><Link className="cs-text-link" href="/dashboard/crop-planning">Explore planting options and rotation <Icon name="right" /></Link></section><EvidenceExplanation /></div>
+      }} /><section className="cs-panel cs-home-plan"><h2>My farm</h2><DataRows rows={[["Location", planSections(draft)[1].rows[0][1]], ["Preferred crops", field.crops.join(", ")], ["Previous crop", draft.history.recent], ["Can water crops without rain", displayOption(draft.resources.irrigation)], ["Your priorities", draft.goals.join(", ")]]} /><Link className="cs-text-link" href="/onboarding/review">Edit farm information <Icon name="right" /></Link></section><section className="cs-panel cs-home-plan"><h2>My planting plan</h2><p>Explore how your field details can inform future choices.</p><Link className="cs-text-link" href="/dashboard/crop-planning">Explore planting options and rotation <Icon name="right" /></Link></section><EvidenceExplanation /></div>
       <div className="cs-dashboard-search-slot"><DashboardSearch field={field} /></div>
       <aside className="cs-dashboard-panels" aria-label="Farm monitoring panels">
         <WeatherPanel location={field.location} />
-        <ResourcesPanel />
+        <ResourcesPanel resources={draft.resources} />
         <ActivityPanel />
         <AnalyticsPanel />
       </aside>
@@ -132,7 +134,7 @@ function SectionContent({ section, draft, field }: { section: DashboardSection; 
     case "fields":
       return <><FieldTable field={field} /><ContentPanel title={field.name}><DataRows rows={plan[1].rows} /></ContentPanel></>;
     case "crop-planning":
-      return <><ContentPanel title="Your farm, in your words"><DataRows rows={[["Location", plan[1].rows[0][1]], ["Preferred crops", field.crops.join(", ")], ["Previous crop", draft.history.recent], ["Water access", draft.resources.irrigation], ["Your priorities", draft.goals.join(", ")]]} /><Link className="cs-text-link" href="/onboarding/review"><Icon name="edit" /> Edit your farm plan</Link></ContentPanel><CropComparison /><RotationExample /><EvidenceExplanation /></>;
+      return <><PlantingResult draft={draft} /><ContentPanel title="Your farm, in your words"><DataRows rows={[["Location", plan[1].rows[0][1]], ["Preferred crops", field.crops.join(", ")], ["Previous crop", draft.history.recent], ["Can water crops without rain", displayOption(draft.resources.irrigation)], ["Your priorities", draft.goals.join(", ")]]} /><Link className="cs-text-link" href="/onboarding/review"><Icon name="edit" /> Edit your farm plan</Link></ContentPanel><CropComparison selected={field.crops} /><RotationExample /><EvidenceExplanation /></>;
     case "assessments":
       return <ContentPanel title="Assessment status"><EmptyState icon="clipboard" title={field.assessment}>
         <p>Maize and common beans are in the proposed Kayonza pilot scope, pending source validation.</p>
@@ -150,7 +152,7 @@ function SectionContent({ section, draft, field }: { section: DashboardSection; 
     case "help":
       return <ContentPanel title="Using your workspace">
         <details><summary>How do I change my farm information?</summary><p>Open <Link href="/onboarding/review">Edit farm plan</Link> and choose the section you want to update.</p></details>
-        <details><summary>How is the map created?</summary><p>The workspace uses an illustrative aerial image and simulated boundary for the demo.</p></details>
+        <details><summary>How is the map created?</summary><p>The map uses OpenStreetMap. It shows your saved location point if provided; otherwise it opens around Kayonza. It does not show a field boundary.</p></details>
         <details><summary>Where is my plan saved?</summary><p>Your answers are stored in this browser. Download a copy from <Link href="/dashboard/reports">Reports</Link>.</p></details>
       </ContentPanel>;
     default:

@@ -1,0 +1,182 @@
+[
+  {
+    "province": "Eastern Province",
+    "longitude": 30.15015384847242,
+    "latitude": -2.239737799967959,
+    "district": "Bugesera"
+  },
+  {
+    "province": "Northern Province",
+    "longitude": 29.826482432852583,
+    "latitude": -1.46625689171793,
+    "district": "Burera"
+  },
+  {
+    "province": "Northern Province",
+    "longitude": 29.784282019923694,
+    "latitude": -1.6985522833542928,
+    "district": "Gakenke"
+  },
+  {
+    "province": "City of Kigali",
+    "longitude": 30.142190703528033,
+    "latitude": -1.8914735884428728,
+    "district": "Gasabo"
+  },
+  {
+    "province": "Eastern Province",
+    "longitude": 30.444601680294884,
+    "latitude": -1.6197547842613977,
+    "district": "Gatsibo"
+  },
+  {
+    "province": "Northern Province",
+    "longitude": 30.113798558340914,
+    "latitude": -1.621702322256846,
+    "district": "Gicumbi"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.843582965581806,
+    "latitude": -2.6181973995100116,
+    "district": "Gisagara"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.70878054673093,
+    "latitude": -2.524647438031401,
+    "district": "Huye"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.90235817503969,
+    "latitude": -2.00944441866494,
+    "district": "Kamonyi"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.39400565855201,
+    "latitude": -2.1408955495214173,
+    "district": "Karongi"
+  },
+  {
+    "province": "Eastern Province",
+    "longitude": 30.641809579482537,
+    "latitude": -1.8446289070248458,
+    "district": "Kayonza"
+  },
+  {
+    "province": "City of Kigali",
+    "longitude": 30.14380101763478,
+    "latitude": -2.008850197608614,
+    "district": "Kicukiro"
+  },
+  {
+    "province": "Eastern Province",
+    "longitude": 30.710376024899944,
+    "latitude": -2.2343890171519565,
+    "district": "Kirehe"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.72271608992304,
+    "latitude": -1.9548067223816585,
+    "district": "Muhanga"
+  },
+  {
+    "province": "Northern Province",
+    "longitude": 29.606607689148166,
+    "latitude": -1.4985602291031346,
+    "district": "Musanze"
+  },
+  {
+    "province": "Eastern Province",
+    "longitude": 30.457121880617457,
+    "latitude": -2.183006485361595,
+    "district": "Ngoma"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.57082503004855,
+    "latitude": -1.8794223739499878,
+    "district": "Ngororero"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.509800198759848,
+    "latitude": -1.6486710136857445,
+    "district": "Nyabihu"
+  },
+  {
+    "province": "Eastern Province",
+    "longitude": 30.38043691557025,
+    "latitude": -1.3388786478570922,
+    "district": "Nyagatare"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.469846946098755,
+    "latitude": -2.4113381791915485,
+    "district": "Nyamagabe"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.156057813183747,
+    "latitude": -2.353738902367226,
+    "district": "Nyamasheke"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.79352097198235,
+    "latitude": -2.335917470366151,
+    "district": "Nyanza"
+  },
+  {
+    "province": "City of Kigali",
+    "longitude": 30.02885511768304,
+    "latitude": -1.9920157584941793,
+    "district": "Nyarugenge"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.51685459287281,
+    "latitude": -2.6948499751205777,
+    "district": "Nyaruguru"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.330327897710664,
+    "latitude": -1.6651532445373243,
+    "district": "Rubavu"
+  },
+  {
+    "province": "Southern Province",
+    "longitude": 29.771728535008418,
+    "latitude": -2.193633593159745,
+    "district": "Ruhango"
+  },
+  {
+    "province": "Northern Province",
+    "longitude": 29.987239299054096,
+    "latitude": -1.739360988007152,
+    "district": "Rulindo"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.079712334104283,
+    "latitude": -2.5589088729756364,
+    "district": "Rusizi"
+  },
+  {
+    "province": "Western Province",
+    "longitude": 29.3245640010746,
+    "latitude": -1.9086993445574472,
+    "district": "Rutsiro"
+  },
+  {
+    "province": "Eastern Province",
+    "longitude": 30.35473251646759,
+    "latitude": -1.9754806384963772,
+    "district": "Rwamagana"
+  }
+]

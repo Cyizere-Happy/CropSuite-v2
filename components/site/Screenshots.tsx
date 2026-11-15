@@ -4,7 +4,7 @@ import { containerClass } from "@/lib/site-config";
 import { SectionReveal } from "./SectionReveal";
 
 const shots: { screen: ScreenName; label: string; caption: string }[] = [
-  { screen: "dashboard", label: "My Farm", caption: "Illustrative demo" },
+  { screen: "dashboard", label: "My farm map", caption: "Demo on a real map" },
   { screen: "farms", label: "Choose crops", caption: "Illustrative demo" },
   { screen: "earnings", label: "Explore options", caption: "Illustrative demo" },
   { screen: "notifications", label: "Rotation planning", caption: "Illustrative demo" },

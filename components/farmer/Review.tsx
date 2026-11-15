@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { type FarmerOnboardingDraft, cropNames, formatPlace, formatPlanting, steps } from "@/lib/farmer/model";
 import { Icon } from "./Icon";
-import { Notice } from "./Shared";
+import { displayOption, Notice } from "./Shared";
 
 export function planSections(draft: FarmerOnboardingDraft) {
   const { selection, location, planting, history, goals, resources } = draft;
@@ -29,12 +29,12 @@ export function planSections(draft: FarmerOnboardingDraft) {
     ] },
     { step: steps[4], rows: [["Priorities", goals.join(", ")]] },
     { step: steps[5], rows: [
-      ["Irrigation", resources.irrigation],
+      ["Can water crops without rain", displayOption(resources.irrigation)],
       ["Planting budget", resources.budget ? new Intl.NumberFormat("en-RW").format(Number(resources.budget)) + " RWF" : ""],
       ["Seeds available", resources.seeds],
       ["Soil observations", resources.soil],
       ["Drainage", resources.drainage],
-      ["Access to inputs", resources.inputs],
+      ["Can get supplies", displayOption(resources.inputs)],
     ] },
   ];
 }
@@ -53,7 +53,7 @@ export function Review({ draft }: { draft: FarmerOnboardingDraft }) {
           </section>
         ))}
       </div>
-      <Notice>Your answers are a planting plan. Agricultural assessments will be available after evidence and services are connected.</Notice>
+      <Notice>Your answers are saved in this browser. CropSuite will show example guidance for exploring your plan.</Notice>
     </>
   );
 }

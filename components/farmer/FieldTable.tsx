@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { formatPlanting, type FarmField } from "@/lib/farmer/model";
 import { Icon } from "./Icon";
-import { EmptyState } from "./Shared";
+import { displayOption, EmptyState } from "./Shared";
 
 export function FieldTable({ field, showDetails }: { field: FarmField; showDetails?: () => void }) {
   const [period, setPeriod] = useState("");
@@ -31,10 +31,10 @@ export function FieldTable({ field, showDetails }: { field: FarmField; showDetai
         </div>
       </div>
       {visible ? <div className="cs-table-scroll" tabIndex={0} aria-label="Field monitoring table" role="region"><table role="table">
-        <thead><tr role="row"><th scope="col">Field name</th><th scope="col">Selected crops</th><th scope="col">Planting period</th><th scope="col">Assessment status</th><th scope="col">Water availability</th><th scope="col">Actions</th></tr></thead>
+        <thead><tr role="row"><th scope="col">Field name</th><th scope="col">Selected crops</th><th scope="col">Planting period</th><th scope="col">Assessment status</th><th scope="col">Water without rain</th><th scope="col">Actions</th></tr></thead>
         <tbody><tr role="row">
           <th scope="row"><span><Icon name="sprout" /></span>{field.name}</th><td data-label="Selected crops">{field.crops.join(", ")}</td><td data-label="Planting period">{formatPlanting(field.planting)}</td>
-          <td data-label="Assessment status"><span className="cs-status-pill">{field.assessment}</span></td><td data-label="Water availability">{field.irrigation || "Not provided"}</td>
+          <td data-label="Assessment status"><span className="cs-status-pill">{field.assessment}</span></td><td data-label="Water without rain">{displayOption(field.irrigation) || "Not provided"}</td>
           <td data-label="Actions"><button className="cs-icon-link" type="button" aria-expanded={actions} onClick={() => setActions(!actions)} aria-label="Field actions"><Icon name="more" /></button></td>
         </tr></tbody>
       </table></div> : <EmptyState icon="filter" title="No fields match these filters"><button type="button" className="cs-text-link" onClick={() => { setPeriod(""); setFilter(""); }}>Clear filters</button></EmptyState>}

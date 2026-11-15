@@ -130,6 +130,8 @@ export function IntroGate({
   /** Browser blocked all autoplay → offer an explicit play action. */
   const [needsTap, setNeedsTap] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [download, setDownload] = useState<{ replay: number; attempt: number; url: string } | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [stage, setStage] = useState<Stage | null>(null);
 
@@ -139,6 +141,7 @@ export function IntroGate({
   const skipRef = useRef<HTMLButtonElement | null>(null);
   const leaveTimer = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
+  const videoReady = download?.replay === replays && download.attempt === attempt;
 
   /* ------------------------------------------------ show / hide decisions -- */
 
@@ -193,10 +196,40 @@ export function IntroGate({
 
   useEffect(() => {
     if (!started || phase !== "active") return;
+    const controller = new AbortController();
+    let objectUrl: string | null = null;
+
+    async function loadVideo() {
+      try {
+        const response = await fetch(videoSrc, { signal: controller.signal });
+        if (!response.ok) throw new Error("Video download failed");
+        const video = await response.blob();
+        if (controller.signal.aborted) return;
+        objectUrl = URL.createObjectURL(video);
+        setDownload({ replay: replays, attempt, url: objectUrl });
+      } catch {
+        if (!controller.signal.aborted) setFailed(true);
+      }
+    }
+
+    void loadVideo();
+    return () => {
+      controller.abort();
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [started, phase, replays, attempt, videoSrc]);
+
+  useEffect(() => {
+    if (!started || phase !== "active") return;
+    setHtmlState("active");
+    skipRef.current?.focus({ preventScroll: true });
+  }, [started, phase, replays]);
+
+  useEffect(() => {
+    if (!started || phase !== "active" || !videoReady || failed) return;
     const video = videoRef.current;
     if (!video) return;
 
-    setHtmlState("active");
     if (replays > 0) {
       try {
         video.currentTime = 0;
@@ -236,11 +269,10 @@ export function IntroGate({
       }
     };
     void tryPlay();
-    skipRef.current?.focus({ preventScroll: true });
     return () => {
       cancelled = true;
     };
-  }, [started, replays, phase]);
+  }, [started, replays, phase, videoReady, failed]);
 
   useEffect(() => {
     if (phase !== "active") return;
@@ -375,9 +407,8 @@ export function IntroGate({
         ref={videoRef}
         className="cs-intro-video"
         data-fit={stage?.fit ?? "cover"}
-        src={videoSrc}
+        src={videoReady ? download.url : undefined}
         poster={posterSrc}
-        autoPlay
         playsInline
         preload="auto"
         onPlay={startLoop}
@@ -397,6 +428,14 @@ export function IntroGate({
       />
       {/* Feathers the film's edges into the page white. */}
       <div className="cs-intro-feather" aria-hidden="true" />
+
+      {!videoReady && !failed && phase === "active" && (
+        <div className="cs-intro-loading" role="status" aria-live="polite">
+          <span className="cs-intro-loading-icon" aria-hidden="true" />
+          <p>Loading your introduction…</p>
+          <span>Please wait while the video loads.</span>
+        </div>
+      )}
 
       {/* Poetic lines in the film's white negative space. */}
       {stage && (
@@ -466,6 +505,13 @@ export function IntroGate({
             </p>
             <button
               type="button"
+              onClick={() => { setFailed(false); setAttempt((value) => value + 1); }}
+              className="mt-4 inline-flex items-center rounded-full border border-line bg-surface px-5 py-3 text-sm font-bold text-ink"
+            >
+              Try again
+            </button>{" "}
+            <button
+              type="button"
               onClick={finish}
               className="mt-4 inline-flex items-center rounded-full bg-primary-deep px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#244f27]"
             >
@@ -493,7 +539,7 @@ export function IntroGate({
           </svg>
         </button>
 
-        <div className="flex items-center gap-2">
+        {videoReady && !failed && <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setCaptionsOn((v) => !v)}
@@ -527,7 +573,7 @@ export function IntroGate({
             <SoundIcon on={muted} />
             {muted ? "Sound on" : "Sound off"}
           </button>
-        </div>
+        </div>}
       </div>
 
       <div ref={progressRef} className="cs-progress" aria-hidden="true" />

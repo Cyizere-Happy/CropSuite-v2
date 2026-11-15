@@ -1,4 +1,5 @@
 import { AppScreen } from "@/components/app-screens/AppScreen";
+import Link from "next/link";
 import { PhoneMockup } from "@/components/device/PhoneMockup";
 import { ScreenIcon } from "@/components/app-screens/parts";
 import { apk, apkFacts } from "@/lib/apk";
@@ -52,13 +53,13 @@ export function Hero() {
             className="tp-hero-item mt-7 flex flex-wrap items-center gap-3"
             style={{ "--d": "600ms" } as React.CSSProperties}
           >
-            <a
-              href="/login"
+            <Link
+              href="/onboarding/journey/farm"
               className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary-deep px-5 py-3 text-sm font-bold text-white shadow-[0_16px_30px_-12px_rgba(46,107,50,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#244f27]"
             >
               <ScreenIcon name="leaf" className="h-5 w-5" />
               Explore My Farm
-            </a>
+            </Link>
             <a
               href="#overview"
               className="inline-flex items-center rounded-full border border-line bg-surface/80 px-5 py-3 text-sm font-bold text-ink backdrop-blur transition-colors hover:border-primary-deep hover:text-primary-deep"
@@ -110,7 +111,7 @@ export function Hero() {
 
         <div className="tp-hero-phone relative mx-auto w-[210px] sm:w-[248px]">
           <PhoneMockup
-            label="Illustrative demo of the CropSuite farmer dashboard"
+            label="CropSuite demo farm with a real map of the Kayonza area and maize and beans selected"
             className="w-full"
             floaty
           >

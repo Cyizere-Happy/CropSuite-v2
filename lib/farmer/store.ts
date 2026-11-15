@@ -6,6 +6,7 @@ import {
   irrigationChoices, sequenceChoices, suggestionChoices, type FarmerOnboardingDraft,
 } from "./model";
 import { firstIncomplete, isAmount, isDate, isMonth, isPin } from "./validation";
+import { fieldChoices, needChoices, waterChoices } from "./guided";
 
 const storageKey = "cropsuite.farmer.v1";
 const eventName = "cropsuite:farmer";
@@ -13,6 +14,7 @@ type FarmerSession = {
   version: 1;
   demo: boolean;
   completed: boolean;
+  guidedCompleted?: boolean;
   draft: FarmerOnboardingDraft;
   persistent: boolean;
 };
@@ -46,6 +48,7 @@ function sanitizeDraft(value: unknown): FarmerOnboardingDraft {
   const planting = record(root.planting);
   const history = record(root.history);
   const resources = record(root.resources);
+  const guide = record(root.guide);
   const pin = text(location.pin, 48);
   const area = text(location.area, 20);
   const budget = text(resources.budget, 20);
@@ -62,6 +65,9 @@ function sanitizeDraft(value: unknown): FarmerOnboardingDraft {
       suggestions: option(selection.suggestions, suggestionChoices),
     },
     location: {
+      country: text(location.country, 2),
+      province: text(location.province, 80),
+      precision: location.precision === "area" ? "area" : "farm",
       district: text(location.district, 80),
       sector: text(location.sector, 80),
       village: text(location.village, 80),
@@ -90,6 +96,14 @@ function sanitizeDraft(value: unknown): FarmerOnboardingDraft {
       drainage: option(resources.drainage, drainageChoices),
       inputs: option(resources.inputs, inputChoices),
     },
+    guide: {
+      water: option(guide.water, waterChoices),
+      observations: options(guide.observations, fieldChoices),
+      resources: option(guide.resources, needChoices),
+      flexible: guide.flexible === true,
+      harvestMonth: isMonth(text(guide.harvestMonth, 7)) ? text(guide.harvestMonth, 7) : "",
+      example: guide.example === true,
+    },
   };
 }
 
@@ -99,7 +113,7 @@ function restore(raw: string | null): FarmerSession {
     const stored = record(JSON.parse(raw));
     if (stored.version !== 1) return empty;
     const draft = sanitizeDraft(stored.draft);
-    return { version: 1, demo: stored.demo === true, completed: stored.completed === true && !firstIncomplete(draft), draft, persistent: true };
+    return { version: 1, demo: stored.demo === true, completed: stored.completed === true && !firstIncomplete(draft), guidedCompleted: stored.guidedCompleted === true, draft, persistent: true };
   } catch {
     return empty;
   }
@@ -164,10 +178,18 @@ export function updateDraft(update: (current: FarmerOnboardingDraft) => FarmerOn
   updateSession((current) => ({ ...current, draft: update(current.draft) }));
 }
 
+export function resetDemoPlan() {
+  updateSession((current) => ({ ...current, demo: true, completed: false, draft: structuredClone(blankDraft) }));
+}
+
 export function completePlan() {
   const current = getSession();
   if (!current.demo || firstIncomplete(current.draft)) return false;
   updateSession((session) => ({ ...session, completed: true }));
   return true;
+}
+
+export function completeGuidedPlan() {
+  updateSession((session) => ({ ...session, demo: true, guidedCompleted: true }));
 }
 
