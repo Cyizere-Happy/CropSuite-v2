@@ -216,19 +216,13 @@
 /* Dashboard shell */
 .cs-dashboard-page {
   min-height: 100dvh;
-  padding: 8px 15px 18px;
-  background: linear-gradient(#20382477, #203824a0), url("/farmer/field.webp") center / cover fixed;
+  background: #e7eae6;
 }
 .cs-dashboard-shell {
   display: grid;
   grid-template-columns: clamp(59px, 6vw, 88px) minmax(0, 1fr);
-  max-width: 1760px;
-  min-height: calc(100dvh - 28px);
-  margin-inline: auto;
+  min-height: 100dvh;
   background: #e7eae6;
-  border: 1px solid #f8fff0a0;
-  border-radius: 20px;
-  box-shadow: 0 14px 40px #16281957, 0 0 0 7px #ffffff24;
   overflow: clip;
 }
 .cs-sidebar {
@@ -467,8 +461,7 @@
 
 
 @media (min-width: 721px) {
-  .cs-dashboard-page { padding-right: max(15px, 3.2vw); }
-  .cs-dashboard-shell { height: calc(100dvh - 55px); min-height: 0; grid-template-rows: minmax(0, 1fr); }
+  .cs-dashboard-shell { height: 100dvh; min-height: 0; grid-template-rows: minmax(0, 1fr); }
   .cs-sidebar { height: 100%; min-height: 0; overflow-y: auto; }
   .cs-dashboard-content { overflow: auto; scrollbar-width: none; }
   .cs-dashboard-table-column .cs-table-panel { min-height: 220px; }
