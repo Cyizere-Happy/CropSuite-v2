@@ -60,6 +60,11 @@ export function validateStep(step: Step, draft: FarmerOnboardingDraft): FormErro
 
 export function firstIncomplete(draft: FarmerOnboardingDraft, before = "review") {
   const limit = steps.findIndex(({ id }) => id === before);
-  return steps.slice(0, limit).find(({ id }) => Object.keys(validateStep(id, draft)).length > 0);
+  return steps.slice(0, limit).find(({ id }) => {
+    const errors = validateStep(id, draft);
+    // The resources form also edits and validates the shared area field.
+    if (before === "resources" && id === "location") delete errors.area;
+    return Object.keys(errors).length > 0;
+  });
 }
 

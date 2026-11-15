@@ -7,7 +7,7 @@ const paths = {
   clipboard: "M8 5H5v16h14V5h-3 M9 3h6l1 4H8l1-4Z M8 12h8 M8 16h8",
   history: "M3 12a9 9 0 1 1 3 7m-3-7V6m0 6h6m3-5v5l3 2",
   chart: "M3 20h18 M5 17v-4h3v4 M11 17V9h3v8 M17 17V5h3v12",
-  settings: "M10 3h4l.5 2.8 2 .9 2.4-1.5 2.8 2.8-1.5 2.4.9 2 2.9.6v4l-2.9.5-.9 2-2.4-1.5-2.8 2.8-2.3-1.5-.7 2.7h-4l-.5-2.8-2-.9-2.4 1.5-2.8-2.8 1.5-2.4-.9-2L1 13v-4l2.9-.5.9-2L3.3 4.1l2.8-2.8 2.4 1.5L10 3Z",
+  settings: "M10 3h4l.6 2.5 2 .9 2.2-1.3 2 2-1.3 2.2.9 2 2.6.6v2.8l-2.6.6-.9 2 1.3 2.2-2 2-2.2-1.3-2 .9-.6 2.5h-4l-.6-2.5-2-.9-2.2 1.3-2-2 1.3-2.2-.9-2-2.6-.6v-2.8l2.6-.6.9-2L3.2 7.1l2-2 2.2 1.3 2-.9L10 3Z M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
   help: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M9.2 9a3 3 0 1 1 4.8 2.4c-1.5 1-2 1.5-2 2.6 M12 17h.01",
   user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z",
   pin: "M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
@@ -48,7 +48,7 @@ export type IconName = keyof typeof paths;
 export function Icon({ name, ...props }: SVGProps<SVGSVGElement> & { name: IconName }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
-      {name === "settings" ? <><path d="m10 3-.7 2.4-2 .9L5 5.2 3 7.4l1.2 2.2-.5 2.1L2 13v2l2.4.8 1 1.7-.5 2.6 2.6 1 1.8-1.7 2 .1L13 22l2.7-.6.8-2.4 1.8-1 2.4.5 1.3-2.3-1.5-2v-2l1.5-1.8-1.2-2.5-2.5.3-1.8-1-.6-2.4L13 4l-1 1.5-2-.1V3Z" /><circle cx="12" cy="12.5" r="3" /></> : <path d={paths[name]} />}
+      <path d={paths[name]} />
     </svg>
   );
 }

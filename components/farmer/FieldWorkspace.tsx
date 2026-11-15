@@ -12,7 +12,12 @@ function FieldDetails({ field, close }: { field: FarmField; close: () => void })
         <button type="button" aria-label="Close field details" title="Close field details" onClick={close}><Icon name="close" /></button>
       </div>
       <div className="cs-field-assessment">
-        <span><Icon name="sprout" /></span>
+        <div className="cs-field-assessment-graphic" aria-hidden="true">
+          <svg viewBox="0 0 140 70" fill="none">
+            <path d="M8 68a62 62 0 0 1 124 0M15 68a55 55 0 0 1 110 0M22 68a48 48 0 0 1 96 0" />
+          </svg>
+          <Icon name="sprout" />
+        </div>
         <div><small>Planting assessment</small><strong>{field.assessment}</strong></div>
       </div>
       <dl>
@@ -24,16 +29,18 @@ function FieldDetails({ field, close }: { field: FarmField; close: () => void })
   );
 }
 
-export function FieldWorkspace({ field, details, setDetails, exportPlan }: {
-  field: FarmField; details: boolean; setDetails: (open: boolean) => void; exportPlan: () => void;
+export type FieldView = "details" | "outline" | "hidden";
+
+export function FieldWorkspace({ field, view, setView, exportPlan }: {
+  field: FarmField; view: FieldView; setView: (view: FieldView) => void; exportPlan: () => void;
 }) {
   const [zoom, setZoom] = useState(1);
-  const [selected, setSelected] = useState(true);
+  const selected = view !== "hidden";
+  const details = view === "details";
   const dialog = useRef<HTMLDialogElement>(null);
 
   function selectField(open: boolean) {
-    setSelected(open);
-    setDetails(open);
+    setView(open ? "details" : "hidden");
   }
 
   function surface(expanded: boolean) {
@@ -56,10 +63,10 @@ export function FieldWorkspace({ field, details, setDetails, exportPlan }: {
           </div>
         </div>
         {selected && <button className="cs-field-marker" type="button" aria-label={"Show details for " + field.name} aria-expanded={details}
-          onClick={() => setDetails(!details)}>
+          onClick={() => setView(details ? "outline" : "details")}>
           <Icon name="sprout" /><strong>{field.name}</strong><span>{field.crops.join(", ")}</span>
         </button>}
-        {selected && details && <FieldDetails field={field} close={() => setDetails(false)} />}
+        {selected && details && <FieldDetails field={field} close={() => setView("outline")} />}
         <div className="cs-map-bottom">
           <button className="cs-map-preview" type="button" title="Reset map view" aria-label="Reset map view" onClick={() => { setZoom(1); selectField(true); }} />
           <small>Illustrative image and outline</small>

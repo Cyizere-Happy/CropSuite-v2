@@ -14,7 +14,7 @@ export function WeatherPanel({ location }: { location: FarmLocation }) {
   return (
     <section className="cs-panel cs-weather" aria-label="Weather">
       <div className="cs-weather-location"><Icon name="pin" /> <span>{formatPlace(location)}</span></div>
-      <div className="cs-weather-current"><div className="cs-temperature" aria-hidden="true">—°</div><div><span><Icon name="cloud" /> Farm weather</span><p>Weather data not connected</p></div></div>
+      <div className="cs-weather-current"><div className="cs-temperature" aria-hidden="true">—°C</div><div><span><Icon name="cloud" /> Farm weather</span><p>Weather data not connected</p></div></div>
       <dl className="cs-weather-metrics">
         {readings.map(({ name, icon }) => <div key={name}><Icon name={icon} /><dt>{name}</dt><dd aria-label="Unavailable">—</dd></div>)}
       </dl>
@@ -47,7 +47,10 @@ export function ResourcesPanel() {
         ))}
       </div>
       <div className="cs-resource-body">
-        <ul className="cs-chart-legend">{resources.map(({ name, color }) => <li key={name}><i style={{ background: color }} />{name}</li>)}</ul>
+        <div>
+          <ul className="cs-chart-legend">{resources.map(({ name, color }) => <li key={name}><i style={{ background: color }} />{name}</li>)}</ul>
+          <p className="cs-panel-note">Illustrative breakdown</p>
+        </div>
         <div className="cs-donut" role="img" aria-label={"Illustrative resource chart, " + period.toLowerCase() + " view"}>
           <svg viewBox="0 0 120 120" aria-hidden="true">
             {slices.map((slice, i) => {
@@ -58,7 +61,6 @@ export function ResourcesPanel() {
           <span>Sample</span>
         </div>
       </div>
-      <p className="cs-panel-note">Illustrative breakdown</p>
     </section>
   );
 }

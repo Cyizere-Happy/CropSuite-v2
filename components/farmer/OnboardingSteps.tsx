@@ -94,9 +94,12 @@ function CropStep({ draft, update, errors }: StepProps) {
           <button type="button" key={category} onClick={() => setFilter(category)} aria-pressed={filter === category}>{category}</button>
         ))}
       </div>
-      <div className="cs-crop-summary" aria-live="polite">
-        <span><Icon name="sprout" /> {names.length} {names.length === 1 ? "crop" : "crops"} selected</span>
-        <span>{names.join(", ") || "Select any crops you’d like to explore."}</span>
+      <div className="cs-crop-summary">
+        <div aria-live="polite">
+          <span><Icon name="sprout" /> {names.length} {names.length === 1 ? "crop" : "crops"} selected</span>
+          {names.length > 0 && <span>{names.join(", ")}</span>}
+        </div>
+        <a className="cs-text-link" href="#crop-suggestions">Suggestion preference</a>
       </div>
       {errors.crops && <FieldError name="crops">{errors.crops}</FieldError>}
       {visible ? <div className="cs-crop-grid" role="group" aria-label="Crop catalogue">
@@ -109,7 +112,7 @@ function CropStep({ draft, update, errors }: StepProps) {
         {customOpen && <InputField label="Crop name" name="custom" value={selection.custom} change={(custom) => change({ custom })} optional placeholder="Enter another crop name" />}
         {selection.custom.trim() && <small>Assessment coverage pending</small>}
       </div>
-      <fieldset className="cs-card cs-radio-card" aria-describedby={errors.suggestions ? "suggestions-error" : undefined}>
+      <fieldset id="crop-suggestions" className="cs-card cs-radio-card" aria-describedby={errors.suggestions ? "suggestions-error" : undefined}>
         <legend>Would you like us to suggest other crops?</legend>
         {suggestionChoices.map((choice) => (
           <label key={choice}><input type="radio" name="suggestions" checked={selection.suggestions === choice} onChange={() => change({ suggestions: choice })} /> {choice}</label>

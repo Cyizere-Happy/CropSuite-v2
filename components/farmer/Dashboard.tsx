@@ -10,7 +10,7 @@ import { toField, type FarmerOnboardingDraft, type FarmField } from "@/lib/farme
 import { leaveDemo, updateDraft, useFarmerSession } from "@/lib/farmer/store";
 import { firstIncomplete } from "@/lib/farmer/validation";
 import { ActivityPanel, AnalyticsPanel, ResourcesPanel, WeatherPanel } from "./DashboardPanels";
-import { FieldWorkspace } from "./FieldWorkspace";
+import { FieldWorkspace, type FieldView } from "./FieldWorkspace";
 import { FieldTable } from "./FieldTable";
 import { Icon } from "./Icon";
 import { planSections } from "./Review";
@@ -68,16 +68,16 @@ function DashboardSearch({ field }: { field: FarmField }) {
 }
 
 function DashboardOverview({ draft, field }: { draft: FarmerOnboardingDraft; field: FarmField }) {
-  const [details, setDetails] = useState(true);
+  const [view, setView] = useState<FieldView>("details");
 
   return (
     <main className="cs-dashboard-grid">
       <h1 className="sr-only">Farmer dashboard</h1>
       <div className="cs-dashboard-map-column" id="field-workspace">
-        <FieldWorkspace field={field} details={details} setDetails={setDetails} exportPlan={() => downloadPlan(draft)} />
+        <FieldWorkspace field={field} view={view} setView={setView} exportPlan={() => downloadPlan(draft)} />
       </div>
       <div className="cs-dashboard-table-column"><FieldTable field={field} showDetails={() => {
-        setDetails(true);
+        setView("details");
         document.getElementById("field-workspace")?.scrollIntoView({ block: "start" });
       }} /></div>
       <div className="cs-dashboard-search-slot"><DashboardSearch field={field} /></div>
