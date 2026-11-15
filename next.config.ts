@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Emit a self-contained server bundle (.next/standalone) for the Docker image.
-  output: "standalone",
+  // Vercel's adapter handles deployment output; Docker needs the standalone bundle.
+  output: process.env.VERCEL === "1" ? undefined : "standalone",
 };
 
 export default nextConfig;
