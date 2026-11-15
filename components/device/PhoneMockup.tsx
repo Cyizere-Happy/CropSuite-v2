@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 /**
  * Reusable CSS phone case. The screenshot (children) is the central content —
- * clipped inside a rounded display, wrapped by a thin black bezel, a brushed
- * metal edge, a dynamic-island cutout, side buttons and a soft shadow.
+ * fitted inside a rounded display, wrapped by a thin black bezel, a brushed
+ * metal edge, a camera bar, side buttons and a soft shadow.
  *
  * Sizing is width-driven (via `className`, e.g. `w-[240px]`). The display is a
  * container-query context, so the screen components size their type and spacing
@@ -40,11 +40,12 @@ export function PhoneMockup({
           }}
         >
           <div className="relative h-full w-full overflow-hidden rounded-[11.5%/5.6%] bg-[#0a0d12] p-[2.4%]">
-            <div className="relative h-full w-full overflow-hidden rounded-[9.4%/4.7%] bg-bg [container-type:inline-size]">
-              {children}
-
-              <div className="pointer-events-none absolute left-1/2 top-[1.6%] z-20 flex h-[3%] min-h-[16px] w-[27%] -translate-x-1/2 items-center justify-end rounded-full bg-[#0a0d12] pr-[7%]">
-                <span className="block h-[42%] min-h-[5px] w-[13%] min-w-[5px] rounded-full bg-[#20293480]" />
+            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[9.4%/4.7%] bg-[#0a0d12] [container-type:inline-size]">
+              <div aria-hidden="true" className="flex h-[5%] shrink-0 items-center justify-center">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#303941]" />
+              </div>
+              <div className="min-h-0 flex-1 px-[2%] pb-[3%]">
+                {children}
               </div>
 
               <div

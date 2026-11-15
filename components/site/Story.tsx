@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { containerClass } from "@/lib/site-config";
 import { SectionReveal } from "./SectionReveal";
 
@@ -25,7 +26,44 @@ export function KayonzaStory() {
 }
 
 export function EvidenceStory() {
-  return <section id="features" className="cs-story-section cs-evidence-story"><div className={containerClass}><SectionReveal className="cs-story-intro"><p className="cs-story-eyebrow">Knowledge from field to sky</p><h2>A better view of your field begins beyond your field.</h2><p>NASA provides historical climate information that can help us examine rainfall and temperature patterns across growing periods. CropSuite brings that wider picture together with crop information and what the farmer tells us.</p></SectionReveal><div className="cs-evidence-layers"><article><span>Farmer knowledge</span><h3>The farmer knows the field.</h3><p>Location, crop choices, previous seasons, water access, resources and observations begin the conversation.</p></article><article><span>NASA POWER</span><h3>NASA provides the wider climate picture.</h3><p>Historical rainfall and temperature estimates can help reveal patterns across growing periods, including dry spells and heat exposure.</p><div className="cs-climate-example" aria-label="Illustrative climate pattern, no measurements shown"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><small>Illustrative pattern · No measurements shown</small></article><article><span>FAO GAEZ</span><h3>Agricultural models help us understand crop possibilities.</h3><p>FAO GAEZ assesses modeled crop suitability under particular climate, soil, water and management conditions. It is a separate agricultural model.</p></article></div><p className="cs-equation">Your knowledge <span>+</span> Earth data <span>+</span> crop science <span>=</span> a more informed planting plan.</p><p className="cs-story-note">Climate and suitability assessments are not connected in this demo. The farmer remains the decision-maker.</p></div></section>;
+  return (
+    <section id="features" className="cs-story-section cs-evidence-story">
+      <div className={containerClass}>
+        <SectionReveal className="cs-story-intro">
+          <p className="cs-story-eyebrow">Knowledge from field to sky</p>
+          <h2>A better view of your field begins beyond your field.</h2>
+          <p>NASA provides historical climate information that can help us examine rainfall and temperature patterns across growing periods. CropSuite brings that wider picture together with crop information and what the farmer tells us.</p>
+        </SectionReveal>
+        <div className="cs-evidence-layers">
+          <article>
+            <span>Farmer knowledge</span>
+            <h3>The farmer knows the field.</h3>
+            <p>Location, crop choices, previous seasons, water access, resources and observations begin the conversation.</p>
+          </article>
+          <article>
+            <div className="cs-source-mark">
+              <Image src="/Nasa Logo.png" alt="" width={706} height={433} />
+              <span>NASA POWER</span>
+            </div>
+            <h3>NASA provides the wider climate picture.</h3>
+            <p>Historical rainfall and temperature estimates can help reveal patterns across growing periods, including dry spells and heat exposure.</p>
+            <div className="cs-climate-example" aria-label="Illustrative climate pattern, no measurements shown"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
+            <small>Illustrative pattern · No measurements shown</small>
+          </article>
+          <article>
+            <div className="cs-source-mark">
+              <Image src="/Fao Logo.webp" alt="" width={331} height={335} />
+              <span>FAO GAEZ</span>
+            </div>
+            <h3>Agricultural models help us understand crop possibilities.</h3>
+            <p>FAO GAEZ assesses modeled crop suitability under particular climate, soil, water and management conditions. It is a separate agricultural model.</p>
+          </article>
+        </div>
+        <p className="cs-equation">Your knowledge <span>+</span> Earth data <span>+</span> crop science <span>=</span> a more informed planting plan.</p>
+        <p className="cs-story-note">Climate and suitability assessments are not connected in this demo. The farmer remains the decision-maker.</p>
+      </div>
+    </section>
+  );
 }
 
 export function Methodology() {

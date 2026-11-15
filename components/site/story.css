@@ -22,7 +22,9 @@
 .cs-story-intro { max-width: 760px; }
 .cs-evidence-layers { margin-top: 50px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
 .cs-evidence-layers article { border-top: 1px solid #b9cdb9; padding-top: 20px; }
-.cs-evidence-layers article > span { color: #47704e; font-weight: 650; font-size: .8rem; }
+.cs-evidence-layers article > span { display: flex; min-height: 58px; align-items: center; color: #47704e; font-weight: 650; font-size: .8rem; }
+.cs-source-mark { display: flex; min-height: 58px; align-items: center; gap: 10px; color: #47704e; font-size: .8rem; font-weight: 650; }
+.cs-source-mark img { width: 58px; height: 58px; object-fit: contain; }
 .cs-evidence-layers h3 { margin-top: 18px; color: #173825; font-weight: 650; font-size: 1.4rem; line-height: 1.2; }
 .cs-evidence-layers small { color: #526c59; font-size: .75rem; }
 .cs-climate-example { height: 68px; display: flex; gap: 5px; align-items: end; margin: 20px 0 5px; border-bottom: 1px solid #a3bea7; }

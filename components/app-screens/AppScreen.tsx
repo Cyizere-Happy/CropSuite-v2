@@ -11,5 +11,5 @@ const previews: Record<ScreenName, string> = {
 };
 
 export function AppScreen({ name }: { name: ScreenName }) {
-  return <Image src={previews[name]} alt="" width={780} height={1688} className="h-full w-full object-cover object-top" loading="eager" unoptimized />;
+  return <Image src={previews[name]} alt="" width={780} height={1688} className="h-full w-full object-contain object-center" loading="eager" unoptimized />;
 }
