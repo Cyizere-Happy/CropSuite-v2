@@ -4,9 +4,10 @@ import { containerClass } from "@/lib/site-config";
 import { SectionReveal } from "./SectionReveal";
 
 const shots: { screen: ScreenName; label: string; caption: string }[] = [
-  { screen: "farms", label: "My Farm", caption: "Screen in design" },
-  { screen: "earnings", label: "Crop Comparison", caption: "Screen in design" },
-  { screen: "notifications", label: "Next Crop", caption: "Screen in design" },
+  { screen: "dashboard", label: "My Farm", caption: "Illustrative demo" },
+  { screen: "farms", label: "Choose crops", caption: "Illustrative demo" },
+  { screen: "earnings", label: "Explore options", caption: "Illustrative demo" },
+  { screen: "notifications", label: "Rotation planning", caption: "Illustrative demo" },
 ];
 
 /**
@@ -23,11 +24,10 @@ export function Screenshots() {
             Screenshots
           </p>
           <h2 className="mt-3 text-[1.7rem] font-black leading-tight text-ink sm:text-[2.15rem]">
-            A look inside the app
+            See your next season more clearly.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The CropSuite screens are being designed for the Kayonza pilot.
-            Real screenshots will replace these blank displays.
+            From your field details to possible planting options, CropSuite is designed to bring the pieces of a farming decision into one understandable place.
           </p>
         </SectionReveal>
 
@@ -39,7 +39,7 @@ export function Screenshots() {
           <SectionReveal
             as="ul"
             stagger
-            className="relative flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] sm:justify-center sm:gap-8 sm:overflow-visible lg:gap-14"
+            className="relative flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] sm:justify-center sm:gap-5 sm:overflow-visible lg:gap-8"
           >
             {shots.map((shot, i) => (
               <li
@@ -49,7 +49,7 @@ export function Screenshots() {
                 }`}
               >
                 <PhoneMockup
-                  label={`CropSuite phone placeholder — ${shot.label} screen is in design`}
+                  label={`CropSuite ${shot.label} screen with illustrative demo data`}
                   className="w-full"
                   floaty={i === 1}
                 >

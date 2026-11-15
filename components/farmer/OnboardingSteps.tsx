@@ -245,7 +245,7 @@ function ResourcesStep({ draft, update, errors }: StepProps) {
   return (
     <>
       <div className="cs-card cs-form-card">
-        <div className="cs-card-heading"><span><Icon name="drop" /></span><div><h2>Water and planting resources</h2><p>Record what you have available for this season.</p></div></div>
+        <div className="cs-card-heading"><span><Icon name="drop" /></span><div><h2>Water and planting resources</h2><p>Rainfed and irrigated farms can have different needs. Available inputs can shape what is practical.</p></div></div>
         <div className="cs-form-grid">
           <SelectField label="Irrigation availability" name="irrigation" value={resources.irrigation} change={(value) => change("irrigation", value)} choices={irrigationChoices} optional />
           <InputField label="Approximate farm area (ha)" name="area" value={draft.location.area}
@@ -256,7 +256,7 @@ function ResourcesStep({ draft, update, errors }: StepProps) {
         <NotesField label="Seeds already available" name="seeds" value={resources.seeds} change={(value) => change("seeds", value)} placeholder="List any seeds you already have, or enter “I don’t know”." />
       </div>
       <div className="cs-card cs-form-card">
-        <div className="cs-card-heading"><span><Icon name="leaf" /></span><div><h2>Soil and drainage</h2><p>Share anything you’ve noticed in the field.</p></div></div>
+        <div className="cs-card-heading"><span><Icon name="leaf" /></span><div><h2>Soil and drainage</h2><p>Your observations add local detail that regional data may miss. It is okay not to know.</p></div></div>
         <SelectField label="Drainage issues" name="drainage" value={resources.drainage} change={(value) => change("drainage", value)} choices={drainageChoices} optional />
         <NotesField label="Soil observations" name="soil" value={resources.soil} change={(value) => change("soil", value)} placeholder="For example, rocky or sandy soil" />
       </div>

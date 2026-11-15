@@ -35,12 +35,12 @@ export const goalChoices = [
 ] as const;
 
 export const steps = [
-  { id: "crops", label: "Select crops", icon: "sprout", title: "What would you like to plant?", description: "Choose the crops you're interested in. CropSuite will help you explore the conditions that matter for your planting plan." },
-  { id: "location", label: "Farm location", icon: "pin", title: "Where is your farm?", description: "Tell us where you farm so your plan has the right local context." },
-  { id: "planting", label: "Planting season", icon: "calendar", title: "When are you planning to plant?", description: "Choose a month to get started. You can refine your dates as your plans take shape." },
-  { id: "history", label: "Farming history", icon: "history", title: "What have you grown before?", description: "The crops you’ve grown can help inform future crop rotation assessments." },
+  { id: "crops", label: "Select crops", icon: "sprout", title: "What would you like to plant?", description: "We begin with the crops you’re considering. Your choices are the starting point for your plan." },
+  { id: "location", label: "Farm location", icon: "pin", title: "Where is your farm?", description: "Your location helps identify which regional environmental information may be relevant to your field." },
+  { id: "planting", label: "Planting season", icon: "calendar", title: "When are you planning to plant?", description: "Planting and harvest dates can help you consider whether a crop’s growing period fits your plans." },
+  { id: "history", label: "Farming history", icon: "history", title: "What have you grown before?", description: "Knowing what grew here before can help you explore a possible crop rotation." },
   { id: "goals", label: "Farming goals", icon: "target", title: "What matters most to you?", description: "Choose the priorities you want to keep in mind while planning." },
-  { id: "resources", label: "Available resources", icon: "basket", title: "What resources are available to you?", description: "Share what you have access to. Leave any question blank if you’re unsure." },
+  { id: "resources", label: "Available resources", icon: "basket", title: "What resources are available to you?", description: "Water, inputs and your observations help make a plan practical. Leave anything blank if you’re unsure." },
   { id: "review", label: "Review information", icon: "checklist", title: "Your Farm, Your Plan", description: "Review the details below before opening your dashboard." },
 ] as const;
 

@@ -1,10 +1,8 @@
 import { IntroGate } from "@/components/intro/IntroGate";
 import { Nav } from "@/components/site/Nav";
 import { Hero } from "@/components/site/Hero";
-import { Overview } from "@/components/site/Overview";
-import { Features } from "@/components/site/Features";
 import { Screenshots } from "@/components/site/Screenshots";
-import { DownloadCta } from "@/components/site/DownloadCta";
+import { FarmerStory, KayonzaStory, EvidenceStory, Methodology, StoryCta } from "@/components/site/Story";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { HeroBackdrop } from "@/components/site/decor";
 import { introAssets } from "@/lib/intro";
@@ -31,10 +29,12 @@ export default function Home() {
         <Nav />
         <main>
           <Hero />
-          <Overview />
-          <Features />
+          <FarmerStory />
+          <KayonzaStory />
+          <EvidenceStory />
           <Screenshots />
-          <DownloadCta />
+          <Methodology />
+          <StoryCta />
         </main>
       </div>
       <SiteFooter />

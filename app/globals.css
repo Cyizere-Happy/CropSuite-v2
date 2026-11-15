@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../components/site/story.css";
 
 /*
   CropSuite landing page design tokens.

@@ -23,7 +23,7 @@ export function Hero() {
             style={{ "--d": "60ms" } as React.CSSProperties}
           >
             <ScreenIcon name="leaf" className="h-3.5 w-3.5" />
-            Kayonza pilot · Rwanda
+            Starting in Kayonza, Rwanda
           </span>
 
           <h1 className="mt-5 text-[2.15rem] font-black leading-[1.08] tracking-tight text-ink sm:text-[2.9rem]">
@@ -31,13 +31,13 @@ export function Hero() {
               className="tp-hero-mask"
               style={{ "--d": "180ms" } as React.CSSProperties}
             >
-              <span>Know your crop.</span>
+              <span>Your land knows a story.</span>
             </span>
             <span
               className="tp-hero-mask"
               style={{ "--d": "300ms" } as React.CSSProperties}
             >
-              <span>Plan what’s next.</span>
+              <span>Let’s understand what comes next.</span>
             </span>
           </h1>
 
@@ -45,8 +45,7 @@ export function Hero() {
             className="tp-hero-item mt-4 text-[15px] leading-relaxed text-muted sm:text-base"
             style={{ "--d": "480ms" } as React.CSSProperties}
           >
-            CropSuite helps farmers understand their land, compare crop options,
-            and plan their next growing season with confidence informed by data.
+            Every farmer faces different decisions. CropSuite begins with what you know about your field and the crops you want to grow, and explores how NASA Earth data could inform your next planting season.
           </p>
 
           <div
@@ -58,13 +57,13 @@ export function Hero() {
               className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-primary-deep px-5 py-3 text-sm font-bold text-white shadow-[0_16px_30px_-12px_rgba(46,107,50,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#244f27]"
             >
               <ScreenIcon name="leaf" className="h-5 w-5" />
-              Start Planning
+              Explore My Farm
             </a>
             <a
               href="#overview"
               className="inline-flex items-center rounded-full border border-line bg-surface/80 px-5 py-3 text-sm font-bold text-ink backdrop-blur transition-colors hover:border-primary-deep hover:text-primary-deep"
             >
-              Explore CropSuite
+              See How It Works
             </a>
           </div>
 
@@ -106,16 +105,18 @@ export function Hero() {
               ))}
             </p>
           )}
+          <p className="tp-hero-item mt-4 text-xs leading-relaxed text-muted" style={{ "--d": "800ms" } as React.CSSProperties}>A NASA Space Apps Challenge 2026 project exploring crop rotation with Earth data.</p>
         </div>
 
         <div className="tp-hero-phone relative mx-auto w-[210px] sm:w-[248px]">
           <PhoneMockup
-            label="CropSuite phone — the app screens are in design; this display is intentionally blank"
+            label="Illustrative demo of the CropSuite farmer dashboard"
             className="w-full"
             floaty
           >
             <AppScreen name="dashboard" />
           </PhoneMockup>
+          <p className="mt-3 text-center text-xs font-semibold text-muted">Illustrative demo</p>
 
           <div className="tp-float-soft absolute -left-6 bottom-8 w-[148px] rounded-2xl border border-line bg-surface p-3.5 shadow-soft sm:-left-16 sm:bottom-10 sm:w-[168px]">
             <p className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wide text-muted">

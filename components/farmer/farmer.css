@@ -459,6 +459,40 @@
 .cs-profile-form .cs-form-field { width: 100%; }
 .cs-profile-form p { color: var(--farm-deep); }
 
+/* Crop planning demonstrations */
+.cs-home-plan { margin-top: 10px; display: grid; gap: 8px; padding: 20px; }
+.cs-home-plan h2 { font-size: 1.1rem; font-weight: 650; }
+.cs-home-plan p, .cs-plan-example > p { color: var(--farm-muted); }
+.cs-dashboard-table-column > .cs-evidence-explanation { margin-top: 10px; }
+.cs-plan-example { background: #fff; border: 1px solid var(--farm-line); border-radius: 16px; padding: clamp(18px, 3vw, 30px); display: grid; gap: 12px; }
+.cs-plan-example > h2 { font-size: clamp(1.5rem, 2.5vw, 2.2rem); line-height: 1.1; font-weight: 670; letter-spacing: -.035em; }
+.cs-plan-example > p { max-width: 680px; }
+.cs-plan-example .cs-example-label { color: #526c59; font-size: .78rem; font-weight: 650; text-transform: uppercase; letter-spacing: .08em; }
+.cs-comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.cs-comparison { border: 1px solid var(--farm-line); border-radius: 12px; overflow: hidden; }
+.cs-comparison > img { display: block; width: 100%; height: 130px; object-fit: cover; }
+.cs-comparison-body { padding: 15px; }
+.cs-comparison h3 { font-size: 1.25rem; font-weight: 650; margin: 3px 0 10px; }
+.cs-comparison dl { font-size: .88rem; }
+.cs-comparison dl > div { display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid var(--farm-line); padding: 7px 0; }
+.cs-comparison dt { color: var(--farm-muted); }
+.cs-comparison dd { text-align: right; }
+.cs-comparison details { padding-top: 10px; border-top: 1px solid var(--farm-line); }
+.cs-comparison summary, .cs-evidence-explanation summary { color: var(--farm-deep); font-weight: 650; }
+.cs-comparison details p { color: var(--farm-muted); margin-top: 6px; }
+.cs-rotation { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.cs-rotation article { display: grid; gap: 7px; align-content: start; }
+.cs-rotation article > span { color: var(--farm-muted); font-size: .8rem; }
+.cs-rotation img { width: 100%; aspect-ratio: 2; object-fit: cover; border-radius: 10px; }
+.cs-rotation strong { color: var(--farm-deep); }
+.cs-plan-example > button { justify-self: start; }
+@media (max-width: 550px) {
+  .cs-comparison-grid { grid-template-columns: 1fr; }
+  .cs-rotation { gap: 7px; }
+  .cs-rotation article > span { min-height: 2.4em; }
+  .cs-rotation strong { font-size: .85rem; }
+}
+
 
 @media (min-width: 721px) {
   .cs-dashboard-shell { height: 100dvh; min-height: 0; grid-template-rows: minmax(0, 1fr); }
