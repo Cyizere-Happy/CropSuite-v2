@@ -2,6 +2,7 @@ import "server-only";
 import type { Environment, Forecast, History } from "./types";
 
 const cache = new Map<string, { until: number; value: Environment }>();
+const pending = new Map<string, Promise<Environment>>();
 const iso = (date: Date) => date.toISOString().replace(/\.\d{3}Z$/, "Z");
 const mean = (values: number[]) => values.reduce((sum, n) => sum + n, 0) / values.length;
 const rounded = (n: number) => Math.round(n * 10) / 10;
@@ -75,10 +76,19 @@ export async function environmentalData(lat: number, lon: number): Promise<Envir
   const key = `${lat.toFixed(5)},${lon.toFixed(5)}`;
   const found = cache.get(key);
   if (found && found.until > Date.now()) return { ...found.value, cache: "cached" };
-  const [forecast, historical] = await Promise.all([weather(lat, lon), history(lat, lon)]);
-  const value = { forecast, history: historical };
-  // Short failures prevent stale errors after credentials or connectivity are fixed.
-  cache.set(key, { value, until: Date.now() + (forecast.status === "available" && historical.status === "available" ? 15 * 60000 : 60000) });
-  if (cache.size > 100) cache.delete(cache.keys().next().value!);
-  return { ...value, cache: "live" };
+  let task = pending.get(key);
+  const shared = Boolean(task);
+  if (!task) {
+    task = (async () => {
+      const [forecast, historical] = await Promise.all([weather(lat, lon), history(lat, lon)]);
+      const value = { forecast, history: historical };
+      // Short failures prevent stale errors after credentials or connectivity are fixed.
+      cache.set(key, { value, until: Date.now() + (forecast.status === "available" && historical.status === "available" ? 15 * 60000 : 60000) });
+      if (cache.size > 100) cache.delete(cache.keys().next().value!);
+      return value;
+    })();
+    pending.set(key, task);
+  }
+  try { return { ...await task, cache: shared ? "cached" : "live" }; }
+  finally { if (pending.get(key) === task) pending.delete(key); }
 }

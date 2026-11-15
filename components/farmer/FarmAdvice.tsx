@@ -5,13 +5,14 @@ import { crops } from "@/lib/farmer/model";
 import { cropLabel, useLanguage } from "./Language";
 
 type Data = Environment & { rotation: RotationAnalysis | null };
-type Props = { data: Data | null; loading: boolean; hasPoint: boolean; previous: string[]; onEdit: () => void; saved?: boolean };
+type Props = { data: Data | null; loading: boolean; hasPoint: boolean; previous: string[]; onEdit: () => void; saved?: boolean; error?: "rate_limit" | "network" | null };
 const families: Record<string, string> = { Maize: "cereal", Sorghum: "cereal", "Common beans": "legume", Soybeans: "legume", Groundnuts: "legume" };
 
-export function FarmAdvice({ data, loading, hasPoint, previous, onEdit, saved = false }: Props) {
+export function FarmAdvice({ data, loading, hasPoint, previous, onEdit, saved = false, error = null }: Props) {
   const { language, text } = useLanguage();
   const analysis = data?.rotation;
   if (loading) return <section className="cs-advice cs-advice-loading" role="status"><span>{text("YOUR NEXT STEP", "INTAMBWE IKURIKIRA")}</span><h2>{text("We’re looking at your choices…", "Turimo kureba ibyo wahisemo…")}</h2><p>{text("Checking the information available for your location.", "Turareba amakuru aboneka y’aho umurima wawe uri.")}</p></section>;
+  if (error) return <section className="cs-advice cs-advice-empty" role="alert"><span>{text("YOUR FARM PLAN", "GAHUNDA Y’UMURIMA WAWE")}</span><h2>{text("Please try again shortly.", "Ongera ugerageze nyuma gato.")}</h2><p>{error === "rate_limit" ? text("Too many requests were made in a short time. Wait a few minutes, then use Refresh information below.", "Hasabwe amakuru inshuro nyinshi mu gihe gito. Tegereza iminota mike, hanyuma ukande Ongera urebe amakuru hepfo.") : text("We couldn’t retrieve your farm information. Check your connection and use Refresh information below.", "Ntabwo twabonye amakuru y’umurima wawe. Reba umurongo wa interineti, hanyuma ukande Ongera urebe amakuru hepfo.")}</p></section>;
   if (analysis?.status !== "exploratory" || !analysis.plans[0]) return <section className="cs-advice cs-advice-empty"><span>{text("YOUR NEXT STEP", "INTAMBWE IKURIKIRA")}</span><h2>{text("Let’s get a clearer picture.", "Reka tubanze tubone andi makuru.")}</h2><p>{!hasPoint ? text("Mark your farm on the map so we can check information for that area.", "Shyira umurima wawe ku ikarita kugira ngo turebe amakuru y’ako gace.") : analysis?.status === "comparison" ? text("Your water supply can change. Compare the rainfed and fully irrigated views below, then check which reflects your situation.", "Amazi ufite ashobora guhinduka. Gereranya amakuru y’imvura n’ayo kuhira hepfo, urebe ahahuje n’uko umeze.") : text("We could not establish a crop option from the information available at this point. Check the map point and ask a local adviser before deciding.", "Ntabwo twabonye igihingwa cyo kugereranya dukoresheje amakuru y’aha hantu. Reba aho wahisemo ku ikarita kandi ubaze umujyanama mbere yo guhitamo.")}</p><button type="button" onClick={onEdit}>{text("Review my answers", "Ongera urebe ibisubizo byanjye")} →</button></section>;
   const plan = analysis.plans[0];
   const first = plan.crops[0];
