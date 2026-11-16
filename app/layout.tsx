@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
+import { INTRO_SESSION_KEY } from "@/lib/intro-events";
 
 /**
  * Jost is the typeface used throughout the product and this page.
@@ -60,12 +61,16 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
+// Set before hydration so a first-session visit does not flash the landing page.
+const introBootScript = `try{if(location.pathname==="/"){var k=${JSON.stringify(INTRO_SESSION_KEY)};var seen=document.cookie.split(";").some(function(v){return v.trim()===k+"=1"});try{seen=seen||sessionStorage.getItem(k)==="1"}catch(e){}if(!seen)document.documentElement.setAttribute("data-intro","pending")}}catch(e){}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={`${jost.variable} h-full`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: introBootScript }} />
         <noscript>
           {/* Without JS the scroll-reveal wrappers never toggle — show everything,
               and never show the (JS-driven) introduction layer. */}

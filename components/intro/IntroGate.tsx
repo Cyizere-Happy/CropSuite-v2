@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 import captions from "@/public/intro-captions.json";
 import {
@@ -14,8 +15,8 @@ import {
 } from "@/lib/intro-events";
 
 /**
- * The CropSuite introduction — a full-screen layer opened on demand from
- * the landing page.
+ * The CropSuite introduction — shown once per browser session and replayable
+ * on demand from the landing page.
  *
  *  - Plays `cropsuite_seed_of_hope_50s.mp4` edge to edge on landscape screens
  *    (object-fit: cover) and letterboxed in white on portrait phones. The film's
@@ -29,7 +30,7 @@ import {
  *    white negative space, with or without sound. Independent captions bar,
  *    Skip at any moment (also Esc), and a working "Continue" fallback if the
  *    file fails to load.
- *  - Remembers completion in sessionStorage; `Watch our story` opens it again.
+ *  - Remembers completion in a session cookie; `Watch our story` opens it again.
  *
  * Cue sync reads `video.currentTime` on `timeupdate`, `seeked` and a
  * requestAnimationFrame loop while playing, so the text stays accurate through
@@ -74,11 +75,26 @@ function setHtmlState(value: "active" | "leaving" | null) {
 
 function markSeen() {
   try {
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${INTRO_SESSION_KEY}=1; Path=/; SameSite=Lax${secure}`;
+  } catch { /* Storage fallback below. */ }
+  try {
     sessionStorage.setItem(INTRO_SESSION_KEY, "1");
   } catch {
-    /* private mode etc. — the intro simply shows again next load */
+    /* Private mode may prevent both storage mechanisms. */
   }
 }
+
+function hasSeen(): boolean {
+  let cookieSeen = false;
+  try {
+    cookieSeen = document.cookie.split(";").some((item) => item.trim() === `${INTRO_SESSION_KEY}=1`);
+  } catch { /* Continue with the storage fallback. */ }
+  try { return cookieSeen || sessionStorage.getItem(INTRO_SESSION_KEY) === "1"; }
+  catch { return cookieSeen; }
+}
+const subscribeNoop = () => () => {};
+const serverSeen = () => false;
 
 function cueAt(t: number): Cue | null {
   if (t >= HIDE_AFTER) return null;
@@ -93,11 +109,10 @@ export function IntroGate({
   videoSrc: string;
   posterSrc: string;
 }) {
-  // The film opens only when a visitor explicitly chooses to watch it.
+  const seenThisSession = useSyncExternalStore(subscribeNoop, hasSeen, serverSeen);
   const [replays, setReplays] = useState(0);
-  const started = replays > 0;
-
   const [phase, setPhase] = useState<Phase>("active");
+  const started = !seenThisSession || replays > 0 || phase === "leaving";
   const [muted, setMuted] = useState(false);
   const [captionsOn, setCaptionsOn] = useState(false);
   /** Browser blocked sound autoplay → playing muted, offer one tap for sound. */
@@ -170,7 +185,7 @@ export function IntroGate({
   /* ---------------------------------------------------------- playback -- */
 
   useEffect(() => {
-    if (!started || phase !== "active") return;
+    if (!started || phase !== "active" || (replays === 0 && hasSeen())) return;
     const controller = new AbortController();
     let objectUrl: string | null = null;
 
@@ -195,7 +210,7 @@ export function IntroGate({
   }, [started, phase, replays, attempt, videoSrc]);
 
   useEffect(() => {
-    if (!started || phase !== "active") return;
+    if (!started || phase !== "active" || (replays === 0 && hasSeen())) return;
     setHtmlState("active");
     skipRef.current?.focus({ preventScroll: true });
   }, [started, phase, replays]);

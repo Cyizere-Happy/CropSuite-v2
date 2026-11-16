@@ -4,7 +4,7 @@
  * the whole IntroGate.
  */
 
-/** sessionStorage key: "1" once the introduction has been watched or skipped. */
+/** Session cookie and sessionStorage fallback: "1" once watched or skipped. */
 export const INTRO_SESSION_KEY = "cropsuite_intro_seen";
 
 /** Dispatched on `window` to re-open the introduction ("Replay our story"). */

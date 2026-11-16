@@ -58,3 +58,5 @@
 @keyframes landing-ring{from{opacity:0;transform:scale(.78) rotate(-18deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes landing-phone-a{from{opacity:0;transform:translate(-30px,70px) rotate(-12deg) scale(.9)}to{opacity:1;transform:translate(0,0) rotate(-5deg) scale(1)}}
 @keyframes landing-phone-b{from{opacity:0;transform:translate(38px,85px) rotate(12deg) scale(.9)}to{opacity:1;transform:translate(0,0) rotate(5deg) scale(1)}}
+/* Start the landing entrance when the optional introduction leaves. */
+html:is([data-intro="pending"],[data-intro="active"]) .cs-landing :is(.landing-nav,.landing-overline,.landing-hero h1 span,.landing-hero h1 em,.landing-hero-copy>p,.landing-action,.landing-hero-note,.landing-bottom-line,.showcase-landscape,.showcase-ring,.showcase-phone-a,.showcase-phone-b,.showcase-sprig,.showcase-caption){animation-play-state:paused}
