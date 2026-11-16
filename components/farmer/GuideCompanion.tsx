@@ -1,0 +1,20 @@
+"use client";
+
+import { useState } from "react";
+import { CornGuide } from "./CornGuide";
+import { cropLabel, useLanguage } from "./Language";
+
+export function GuideCompanion({ step, selected, previous, pin, water, plantingMonth, area }: { step: number; selected: string[]; previous: string[]; pin: string; water: string; plantingMonth: string; area: boolean }) {
+  const { language, text } = useLanguage();
+  const [showTip, setShowTip] = useState(false);
+  const headings = [text("Let’s grow a good plan.", "Reka dutegure neza."), text("Let’s find your farm.", "Reka dushake umurima wawe."), text("Your field has a story.", "Umurima wawe ufite amateka."), text("Let’s look ahead.", "Reka turebe imbere."), text("Every drop matters.", "Buri gitonyanga ni ingenzi.")];
+  const messages = [
+    selected.length ? text(`You’ve chosen ${selected.map((name) => cropLabel(name, language)).join(", ")}. You can choose more.`, `Wahisemo ${selected.map((name) => cropLabel(name, language)).join(", ")}. Ushobora kongeraho ibindi.`) : text("Start by choosing crops to compare.", "Banza uhitemo ibihingwa byo kugereranya."),
+    pin ? (area ? text("An approximate area is selected. You can refine it on the map.", "Wahisemo hafi y’agace. Ushobora kuhasubiramo ku ikarita.") : text("Your map point is selected. You can move it if needed.", "Watoranyije umurima ku ikarita. Ushobora kuwuhindura.")) : text("Find your area, then mark your farm on the map.", "Shaka agace uherereyemo, werekane umurima ku ikarita."),
+    previous.length ? text("Thanks! Your crop history helps us explore rotation.", "Urakoze! Ibyo wahinze bidufasha kureba uko ibihingwa byahinduranywa.") : text("Tell me what grew here before. It’s okay if you’re unsure.", "Mbwira ibyo wahinze ubushize. Ni sawa niba utibuka."),
+    plantingMonth ? text("That gives us a month to look at past climate patterns.", "Uku kwezi kudufasha kureba uko ikirere cyahoze kimeze.") : text("Choose a month, or tell me you’re not sure yet.", "Hitamo ukwezi, cyangwa umbwire ko utarabimenya."),
+    water ? text("Got it. We’ll consider the water choice you shared.", "Ndabyumvise. Tuzareba uburyo bw’amazi wahisemo.") : text("Let me know how your crops get their water.", "Mbwira uko imyaka yawe ibona amazi.")
+  ];
+  const tips = [text("Choose any crops you’re considering. You can also ask to see other options.", "Hitamo ibihingwa wifuza. Ushobora no gusaba ko tukwereka ibindi."), text("Tap the map at your farm, or use the district centre for an approximate point.", "Kanda aho umurima uri ku ikarita, cyangwa ukoreshe hagati y’akarere nk’igereranyo."), text("Choose every crop you grew last season, or select ‘I don’t remember’.", "Hitamo ibyo wahinze ubushize, cyangwa uhitemo ‘Sinibuka’."), text("The month is a starting point, not a prediction of the rains.", "Ukwezi ni intangiriro; si iteganyagihe ry’imvura."), text("Choose rain only if you depend on rainfall; choose sometimes if water access varies.", "Hitamo imvura gusa niba ari yo wishingikirizaho; hitamo rimwe na rimwe niba amazi ahinduka.")];
+  return <aside className={`cs-guide-art cs-guide-companion cs-guide-companion--${step}`}><span>{text("YOUR FARM GUIDE", "UMUJYANAMA W’UMURIMA")}</span><div className="cs-companion-center"><button type="button" className="cs-companion-button" onClick={() => setShowTip((value) => !value)} aria-expanded={showTip} aria-label={showTip ? text("Hide guide tip", "Hisha inama") : text("Show guide tip", "Reba inama")}><CornGuide step={step} /><span className="cs-companion-badge" aria-hidden="true">{["✦", "⌖", "↻", "◷", "◉"][step]}</span></button><span className="cs-companion-tap">{showTip ? text("Tap to close tip", "Kanda uhise inama") : text("Tap me for a tip", "Kanda umbaze inama")}</span></div><div className="cs-guide-mascot-copy"><h2>{headings[step]}</h2><p className="cs-companion-message" aria-live="polite">{showTip ? tips[step] : messages[step]}</p><small>{text(`Step ${step + 1} of 5`, `Intambwe ${step + 1} kuri 5`)}</small></div></aside>;
+}

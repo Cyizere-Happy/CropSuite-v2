@@ -6,7 +6,7 @@ import type { RotationAnalysis } from "./rotationEngine";
 
 const key = "cropsuite.saved-analysis.v1";
 const event = "cropsuite:saved-analysis";
-export type SavedAnalysis = { savedAt: string; pin: string; locationPrecision?: "farm" | "area"; crops: string[]; previous: string; plantingMonth: string; water: string; data: (Environment & { cache: string; rotation: RotationAnalysis | null }) | null };
+export type SavedAnalysis = { savedAt: string; example?: boolean; pin: string; locationPrecision?: "farm" | "area"; crops: string[]; previous: string; plantingMonth: string; water: string; data: (Environment & { cache: string; rotation: RotationAnalysis | null }) | null };
 
 export function saveAnalysis(value: SavedAnalysis) {
   try { localStorage.setItem(key, JSON.stringify(value)); window.dispatchEvent(new Event(event)); return true; } catch { return false; }

@@ -1,0 +1,218 @@
+{
+  "forecast": {
+    "status": "available",
+    "provider": "Meteomatics",
+    "message": "48-hour forecast",
+    "retrievedAt": "2026-11-16T04:37:52.336Z",
+    "issuedAt": null,
+    "start": "2026-11-16T04:00:00Z",
+    "end": "2026-11-18T04:00:00Z",
+    "rainMm": 10.5,
+    "meanTempC": 21.2,
+    "maxWindMs": 3.7
+  },
+  "history": {
+    "status": "available",
+    "provider": "NASA POWER",
+    "message": "Historical climate estimate",
+    "year": 2025,
+    "periodStart": 2021,
+    "periodEnd": 2025,
+    "monthly": [
+      {
+        "month": 1,
+        "meanRainMm": 132.9,
+        "minRainMm": 53.5,
+        "maxRainMm": 236.1,
+        "meanTempC": 20.5,
+        "meanSolarMjM2Day": 17.1
+      },
+      {
+        "month": 2,
+        "meanRainMm": 157.5,
+        "minRainMm": 62.7,
+        "maxRainMm": 306.8,
+        "meanTempC": 21.1,
+        "meanSolarMjM2Day": 17.7
+      },
+      {
+        "month": 3,
+        "meanRainMm": 116,
+        "minRainMm": 83.2,
+        "maxRainMm": 176,
+        "meanTempC": 20.9,
+        "meanSolarMjM2Day": 18.1
+      },
+      {
+        "month": 4,
+        "meanRainMm": 194.4,
+        "minRainMm": 133.4,
+        "maxRainMm": 245,
+        "meanTempC": 20.4,
+        "meanSolarMjM2Day": 16.9
+      },
+      {
+        "month": 5,
+        "meanRainMm": 83.6,
+        "minRainMm": 55.2,
+        "maxRainMm": 107.4,
+        "meanTempC": 20.4,
+        "meanSolarMjM2Day": 17.2
+      },
+      {
+        "month": 6,
+        "meanRainMm": 25.4,
+        "minRainMm": 6.3,
+        "maxRainMm": 48.9,
+        "meanTempC": 19.8,
+        "meanSolarMjM2Day": 18.1
+      },
+      {
+        "month": 7,
+        "meanRainMm": 8.5,
+        "minRainMm": 0.9,
+        "maxRainMm": 12.1,
+        "meanTempC": 19.7,
+        "meanSolarMjM2Day": 19.1
+      },
+      {
+        "month": 8,
+        "meanRainMm": 85.1,
+        "minRainMm": 11.1,
+        "maxRainMm": 182.1,
+        "meanTempC": 20.9,
+        "meanSolarMjM2Day": 18.3
+      },
+      {
+        "month": 9,
+        "meanRainMm": 111.3,
+        "minRainMm": 42.9,
+        "maxRainMm": 183.2,
+        "meanTempC": 21.7,
+        "meanSolarMjM2Day": 18.2
+      },
+      {
+        "month": 10,
+        "meanRainMm": 112.9,
+        "minRainMm": 77.9,
+        "maxRainMm": 216.2,
+        "meanTempC": 21.4,
+        "meanSolarMjM2Day": 18.2
+      },
+      {
+        "month": 11,
+        "meanRainMm": 175,
+        "minRainMm": 84.9,
+        "maxRainMm": 210.8,
+        "meanTempC": 20.6,
+        "meanSolarMjM2Day": 16.3
+      },
+      {
+        "month": 12,
+        "meanRainMm": 143.5,
+        "minRainMm": 118,
+        "maxRainMm": 222,
+        "meanTempC": 20.7,
+        "meanSolarMjM2Day": 16
+      }
+    ],
+    "rainMm": 1013.4,
+    "meanTempC": 21.2,
+    "days": 365,
+    "retrievedAt": "2026-11-16T04:37:53.632Z"
+  },
+  "cache": "sample",
+  "rotation": {
+    "status": "exploratory",
+    "reason": "Comparison uses historical GAEZ grid-cell estimates and simple rotation assumptions. It is provisional and does not assess this field or predict yield.",
+    "scenario": "rainfed",
+    "candidates": [
+      {
+        "id": "maize",
+        "name": "Maize",
+        "family": "cereal",
+        "baseline": 2205,
+        "dataset": "GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.MZE.LRLM",
+        "url": "https://storage.googleapis.com/fao-gismgr-gaez-v5-data/DATA/GAEZ-V5/MAPSET/RES05-SXX30AS/GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.MZE.LRLM.tif",
+        "selected": true
+      },
+      {
+        "id": "common-beans",
+        "name": "Common beans",
+        "family": "legume",
+        "baseline": 2045,
+        "dataset": "GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.PHB.LRLM",
+        "url": "https://storage.googleapis.com/fao-gismgr-gaez-v5-data/DATA/GAEZ-V5/MAPSET/RES05-SXX30AS/GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.PHB.LRLM.tif",
+        "selected": false
+      },
+      {
+        "id": "sorghum",
+        "name": "Sorghum",
+        "family": "cereal",
+        "baseline": 2045,
+        "dataset": "GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.SRG.LRLM",
+        "url": "https://storage.googleapis.com/fao-gismgr-gaez-v5-data/DATA/GAEZ-V5/MAPSET/RES05-SXX30AS/GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.SRG.LRLM.tif",
+        "selected": false
+      },
+      {
+        "id": "soybeans",
+        "name": "Soybeans",
+        "family": "legume",
+        "baseline": 1973,
+        "dataset": "GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.SOY.LRLM",
+        "url": "https://storage.googleapis.com/fao-gismgr-gaez-v5-data/DATA/GAEZ-V5/MAPSET/RES05-SXX30AS/GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.SOY.LRLM.tif",
+        "selected": false
+      },
+      {
+        "id": "groundnuts",
+        "name": "Groundnuts",
+        "family": "legume",
+        "baseline": 599,
+        "dataset": "GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.GRD.LRLM",
+        "url": "https://storage.googleapis.com/fao-gismgr-gaez-v5-data/DATA/GAEZ-V5/MAPSET/RES05-SXX30AS/GAEZ-V5.RES05-SXX30AS.HP0120.AGERA5.HIST.GRD.LRLM.tif",
+        "selected": false
+      }
+    ],
+    "plans": [
+      {
+        "crops": [
+          "Common beans",
+          "Maize",
+          "Common beans"
+        ],
+        "score": 6295,
+        "repeatedFamily": false
+      },
+      {
+        "crops": [
+          "Common beans",
+          "Maize",
+          "Soybeans"
+        ],
+        "score": 6223,
+        "repeatedFamily": false
+      },
+      {
+        "crops": [
+          "Soybeans",
+          "Maize",
+          "Common beans"
+        ],
+        "score": 6223,
+        "repeatedFamily": false
+      }
+    ],
+    "missing": [],
+    "unavailable": [],
+    "excluded": [],
+    "plantingMonth": "2027-02",
+    "assumptions": {
+      "repeatedFamilyPenalty": 500,
+      "selectedCropBonus": 250,
+      "indexScale": "0–10000",
+      "period": "2001–2020",
+      "management": "low input",
+      "warning": "Weights are illustrative, not FAO-approved or independently validated. Weather is not included in the ranking."
+    }
+  }
+}

@@ -5,10 +5,10 @@ import { crops } from "@/lib/farmer/model";
 import { cropLabel, useLanguage } from "./Language";
 
 type Data = Environment & { rotation: RotationAnalysis | null };
-type Props = { data: Data | null; loading: boolean; hasPoint: boolean; previous: string[]; onEdit: () => void; saved?: boolean; error?: "rate_limit" | "network" | null };
+type Props = { data: Data | null; loading: boolean; hasPoint: boolean; previous: string[]; onEdit: () => void; saved?: boolean; sample?: boolean; error?: "rate_limit" | "network" | null };
 const families: Record<string, string> = { Maize: "cereal", Sorghum: "cereal", "Common beans": "legume", Soybeans: "legume", Groundnuts: "legume" };
 
-export function FarmAdvice({ data, loading, hasPoint, previous, onEdit, saved = false, error = null }: Props) {
+export function FarmAdvice({ data, loading, hasPoint, previous, onEdit, saved = false, sample = false, error = null }: Props) {
   const { language, text } = useLanguage();
   const analysis = data?.rotation;
   if (loading) return <section className="cs-advice cs-advice-loading" role="status"><span>{text("YOUR NEXT STEP", "INTAMBWE IKURIKIRA")}</span><h2>{text("We’re looking at your choices…", "Turimo kureba ibyo wahisemo…")}</h2><p>{text("Checking the information available for your location.", "Turareba amakuru aboneka y’aho umurima wawe uri.")}</p></section>;
@@ -21,7 +21,7 @@ export function FarmAdvice({ data, loading, hasPoint, previous, onEdit, saved = 
   const knownPrevious = previous.filter((name) => families[name]);
   const differentFamily = candidate?.family && knownPrevious.length > 0 && knownPrevious.length === previous.length && knownPrevious.every((name) => families[name] !== candidate.family);
   const sameFamily = candidate?.family && knownPrevious.some((name) => families[name] === candidate.family);
-  const rain = !saved && data?.forecast.status === "available" ? data.forecast.rainMm : undefined;
+  const rain = !saved && !sample && data?.forecast.status === "available" ? data.forecast.rainMm : undefined;
   const rotationExplanation = differentFamily ? text("It belongs to a different crop family from the crops you recorded last season. This can help manage some pests.", "Iki gihingwa kiri mu muryango utandukanye n’ibyo wahinze ubushize. Ibi bishobora gufasha kurwanya udukoko tumwe na tumwe.") : sameFamily ? text("A crop from this family was grown before. Ask locally about rotation and pest history.", "Wahinze igihingwa cyo muri uyu muryango. Baza umujyanama ku guhinduranya ibihingwa n’udukoko twabayeho.") : text("Your past crops help put rotation options in context. Check your field’s crop history locally.", "Ibyo wahinze bifasha kureba uko ibihingwa byahinduranywa. Reba amateka y’umurima wawe.");
   return <section className="cs-advice cs-insight" aria-labelledby="cs-advice-title">
     <div className="cs-insight-hero"><div className="cs-insight-copy"><span className="cs-insight-kicker">✦ &nbsp;{text("YOUR FARM PLAN · FOR REVIEW", "GAHUNDA Y’UMURIMA · YO KUBANZA KUREBA")}</span><h2 id="cs-advice-title">{text("A next crop to explore", "Igihingwa gikurikira wasuzuma")}</h2><p className="cs-insight-crop">{cropLabel(first, language)}</p><p>{candidate?.selected ? text("You chose this crop. It appears in the first sequence of the area-based comparison.", "Wahisemo iki gihingwa. Kiboneka mbere muri gahunda yagereranyijwe hakoreshejwe amakuru y’aka gace.") : text("This crop appears first in one sequence to explore for your area and water choice.", "Iki gihingwa kiza mbere muri gahunda wasuzuma ukurikije agace n’amazi wahisemo.")}</p><a href="#why-this-plan" className="cs-insight-jump">{text("See why", "Menya impamvu")} <span aria-hidden="true">↓</span></a></div>{crop && <div className="cs-insight-photo"><Image src={crop.image} alt="" fill sizes="(max-width: 760px) 90vw, 420px" /><span>{text("A STARTING POINT", "INTANGIRIRO")}</span></div>}</div>

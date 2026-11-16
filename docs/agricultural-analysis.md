@@ -31,3 +31,7 @@ Remote FAO reads require HTTP range support and an EPSG:4326 30-arcsecond grid. 
 
 Live checks on 15 November 2026 used the coordinates in `tests/global-live.test.mjs`. Meteomatics forecasts and NASA histories were available in all six locations. The rainfed FAO raster had positive values and three exploratory sequences for Kayonza and New Delhi; the tested city-centre points in Nairobi, Accra, São Paulo and Paris yielded zeros and/or no-data, so no rotation was generated. These are point-specific checks, not evidence of coverage or lack of coverage across an entire country. The recommendations remain an unvalidated heuristic and require local agronomic review.
 
+
+## Guided example
+
+The farmer setup offers an explicit guided example using `lib/farmer/demo-snapshot.json`, captured for the Kayonza example point on 16 November 2026. It uses fixed example answers and does not call the environment endpoint. The stored weather forecast is an old snapshot, never current weather; example mode and saved example plans are labeled accordingly. The example is a demonstration of the interface, not a field-specific recommendation. Leaving the example restores the user's original unsaved farm answers. Sample selection is deliberately read-only so a changed input cannot be presented alongside an unrelated fixed result.

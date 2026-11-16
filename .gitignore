@@ -26,8 +26,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files — never commit real values
-.env
-.env.*
 !.env.example
 
 # secrets / keys / signing material — never commit
@@ -46,3 +44,4 @@ yarn-error.log*
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+config.bat
